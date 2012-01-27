@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="br.com.seatecnologia.cldf.enquetenoticia.service.EnqueteNoticiaLocalService" class="br.com.seatecnologia.cldf.enquetenoticia.service.impl.EnqueteNoticiaLocalServiceImpl" />
+	<bean id="br.com.seatecnologia.cldf.enquetenoticia.service.EnqueteNoticiaLocalServiceUtil" class="br.com.seatecnologia.cldf.enquetenoticia.service.EnqueteNoticiaLocalServiceUtil">
+		<property name="service" ref="br.com.seatecnologia.cldf.enquetenoticia.service.EnqueteNoticiaLocalService" />
+	</bean>
+	<bean id="br.com.seatecnologia.cldf.enquetenoticia.service.persistence.EnqueteNoticiaPersistence" class="br.com.seatecnologia.cldf.enquetenoticia.service.persistence.EnqueteNoticiaPersistenceImpl" parent="basePersistence" />
+</beans>

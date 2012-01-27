@@ -1,0 +1,58 @@
+
+<%@page import="com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil"%>
+<%@page import="com.liferay.portlet.polls.service.PollsQuestionLocalServiceUtil"%>
+<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
+<%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
+<%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %>
+
+<portlet:actionURL name='associatePollArticle' var='submitURL'></portlet:actionURL>
+
+<aui:form method='POST' action="<%= submitURL %>">
+
+
+<div id='poll_search_container'>
+<liferay-ui:search-container>
+	<liferay-ui:search-container-results
+		results="<%= com.liferay.portlet.polls.service.PollsQuestionLocalServiceUtil.getPollsQuestions(searchContainer.getStart(), searchContainer.getEnd()) %>"
+		total="<%= PollsQuestionLocalServiceUtil.getPollsQuestionsCount() %>"
+	/>
+
+	<liferay-ui:search-container-row
+		className="com.liferay.portlet.polls.model.PollsQuestion"
+		modelVar="aPollsQuestion"
+		keyProperty="questionId"
+	>
+		<liferay-ui:search-container-column-jsp path="/html/enquetenoticia/selector_poll.jsp" cssClass="radio-check-search-poll-column"></liferay-ui:search-container-column-jsp>	
+		<liferay-ui:search-container-column-text name="title" value='<%= aPollsQuestion.getTitle("en_US") %>' />
+	
+	</liferay-ui:search-container-row>
+
+	<liferay-ui:search-iterator />
+</liferay-ui:search-container>
+<portlet:defineObjects />
+</div>
+
+<div id="journalArticle_search_container">
+<liferay-ui:search-container>
+	<liferay-ui:search-container-results
+		results="<%= com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil.getJournalArticles(searchContainer.getStart(), searchContainer.getEnd()) %>"
+		total="<%= JournalArticleLocalServiceUtil.getJournalArticlesCount() %>"
+	/>
+
+	<liferay-ui:search-container-row
+		className="com.liferay.portlet.journal.model.JournalArticle"
+		modelVar="aJournalArticle"
+		keyProperty="articleId"
+	>
+	
+		<liferay-ui:search-container-column-jsp path="/html/enquetenoticia/selector_article.jsp" cssClass="radio-check-search-poll-column"></liferay-ui:search-container-column-jsp>
+		<liferay-ui:search-container-column-text property="title" />
+
+		
+	</liferay-ui:search-container-row>
+
+	<liferay-ui:search-iterator />
+</liferay-ui:search-container>
+</div>
+<aui:button type="submit"></aui:button>
+</aui:form>

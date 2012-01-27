@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.0.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_0_0.dtd">
+<service-builder
+	package-path="br.com.seatecnologia.cldf.enquetenoticia">
+	<author>Wallacy, Adan, Eduardo</author>
+	<namespace>EnqueteNoticia</namespace>
+
+	<entity name="EnqueteNoticia" local-service="true" remote-service="false">
+		<column name="enqueteNoticiaId" type="long" primary="true"></column>
+		<column name="pollId" type="long"></column>
+		<column name="articleId" type="long"></column>
+	</entity>
+
+
+</service-builder>

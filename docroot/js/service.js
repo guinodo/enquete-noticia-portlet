@@ -1,0 +1,1 @@
+Liferay.Service.register("Liferay.Service.EnqueteNoticia", "br.com.seatecnologia.cldf.enquetenoticia.service", "enquete-noticia-portlet");
