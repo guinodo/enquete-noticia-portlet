@@ -9,4 +9,4 @@ PollsQuestion poll = (PollsQuestion)row.getObject();
 
 %>
 
-<aui:input type="radio" name="pollId" value="<%= poll.getQuestionId() %>" label=""></aui:input>
+<aui:input type="radio" name="questionId" value="<%= poll.getQuestionId() %>" label=""></aui:input>

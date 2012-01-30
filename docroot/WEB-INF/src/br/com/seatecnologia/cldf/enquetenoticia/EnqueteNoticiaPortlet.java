@@ -8,6 +8,8 @@ import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
+import java.io.IOException;
+
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -17,19 +19,21 @@ import javax.portlet.ActionResponse;
  */
 public class EnqueteNoticiaPortlet extends MVCPortlet {
 	
-	public void associatePollArticle(ActionRequest request, ActionResponse response) throws SystemException{
+	public void associatePollArticle(ActionRequest request, ActionResponse response) throws SystemException, IOException{
 		
-		String pollId = request.getParameter("pollId");
-		System.out.println("PollID: "+ pollId);
+		String pollId = request.getParameter("questionId");
+		System.out.println("Question ID: "+ pollId);
 		String[] articleIds = request.getParameterValues("articleId");
 		
 		for (String articleId : articleIds) {
-			System.out.println("ArticleID: " + articleId);
+			System.out.println("Article ID: " + articleId);
 			EnqueteNoticia enqueteNoticia = new EnqueteNoticiaImpl();
 			enqueteNoticia.setArticleId(Long.parseLong(articleId));
 			enqueteNoticia.setPollId(Long.parseLong(pollId));
 			enqueteNoticia.setEnqueteNoticiaId(CounterLocalServiceUtil.increment(EnqueteNoticia.class.getName()));
 			EnqueteNoticiaLocalServiceUtil.addEnqueteNoticia(enqueteNoticia);
+			
+			sendRedirect(request, response);
 		}
 			
 		
