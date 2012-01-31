@@ -1,0 +1,1 @@
+create index IX_6032E3D3 on EnqueteNoticia_EnqueteNoticia (pollId);

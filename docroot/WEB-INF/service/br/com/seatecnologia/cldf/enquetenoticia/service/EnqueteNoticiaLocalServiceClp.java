@@ -84,6 +84,12 @@ public class EnqueteNoticiaLocalServiceClp implements EnqueteNoticiaLocalService
 
 		_setBeanIdentifierMethodKey15 = new MethodKey(_classLoaderProxy.getClassName(),
 				"setBeanIdentifier", java.lang.String.class);
+
+		_getNoticiasAssociadasMethodKey16 = new MethodKey(_classLoaderProxy.getClassName(),
+				"getNoticiasAssociadas", long.class, int.class, int.class);
+
+		_countByQuestionIdMethodKey17 = new MethodKey(_classLoaderProxy.getClassName(),
+				"countByQuestionId", long.class);
 	}
 
 	public br.com.seatecnologia.cldf.enquetenoticia.model.EnqueteNoticia addEnqueteNoticia(
@@ -523,6 +529,66 @@ public class EnqueteNoticiaLocalServiceClp implements EnqueteNoticiaLocalService
 		}
 	}
 
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> getNoticiasAssociadas(
+		long questionId, int start, int end)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		MethodHandler methodHandler = new MethodHandler(_getNoticiasAssociadasMethodKey16,
+				questionId, start, end);
+
+		try {
+			returnObj = _classLoaderProxy.invoke(methodHandler);
+		}
+		catch (Throwable t) {
+			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+				throw (com.liferay.portal.kernel.exception.PortalException)t;
+			}
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.liferay.portlet.journal.model.JournalArticle>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	public int countByQuestionId(long questionId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		MethodHandler methodHandler = new MethodHandler(_countByQuestionIdMethodKey17,
+				questionId);
+
+		try {
+			returnObj = _classLoaderProxy.invoke(methodHandler);
+		}
+		catch (Throwable t) {
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return ((Integer)returnObj).intValue();
+	}
+
 	public ClassLoaderProxy getClassLoaderProxy() {
 		return _classLoaderProxy;
 	}
@@ -544,4 +610,6 @@ public class EnqueteNoticiaLocalServiceClp implements EnqueteNoticiaLocalService
 	private MethodKey _updateEnqueteNoticiaMethodKey13;
 	private MethodKey _getBeanIdentifierMethodKey14;
 	private MethodKey _setBeanIdentifierMethodKey15;
+	private MethodKey _getNoticiasAssociadasMethodKey16;
+	private MethodKey _countByQuestionIdMethodKey17;
 }

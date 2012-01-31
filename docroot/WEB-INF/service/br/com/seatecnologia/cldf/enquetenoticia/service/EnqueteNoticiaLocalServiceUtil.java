@@ -256,6 +256,18 @@ public class EnqueteNoticiaLocalServiceUtil {
 		getService().setBeanIdentifier(beanIdentifier);
 	}
 
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> getNoticiasAssociadas(
+		long questionId, int start, int end)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getNoticiasAssociadas(questionId, start, end);
+	}
+
+	public static int countByQuestionId(long questionId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().countByQuestionId(questionId);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

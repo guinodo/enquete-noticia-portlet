@@ -248,6 +248,19 @@ public class EnqueteNoticiaLocalServiceWrapper
 		_enqueteNoticiaLocalService.setBeanIdentifier(beanIdentifier);
 	}
 
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> getNoticiasAssociadas(
+		long questionId, int start, int end)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _enqueteNoticiaLocalService.getNoticiasAssociadas(questionId,
+			start, end);
+	}
+
+	public int countByQuestionId(long questionId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _enqueteNoticiaLocalService.countByQuestionId(questionId);
+	}
+
 	public EnqueteNoticiaLocalService getWrappedEnqueteNoticiaLocalService() {
 		return _enqueteNoticiaLocalService;
 	}

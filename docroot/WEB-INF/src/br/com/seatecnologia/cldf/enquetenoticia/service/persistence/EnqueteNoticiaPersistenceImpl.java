@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
+import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -37,6 +38,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.ModelListener;
@@ -73,6 +75,20 @@ public class EnqueteNoticiaPersistenceImpl extends BasePersistenceImpl<EnqueteNo
 	public static final String FINDER_CLASS_NAME_ENTITY = EnqueteNoticiaImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
+	public static final FinderPath FINDER_PATH_FIND_BY_QUESTIONID = new FinderPath(EnqueteNoticiaModelImpl.ENTITY_CACHE_ENABLED,
+			EnqueteNoticiaModelImpl.FINDER_CACHE_ENABLED,
+			EnqueteNoticiaImpl.class, FINDER_CLASS_NAME_LIST,
+			"findByQuestionID",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_QUESTIONID = new FinderPath(EnqueteNoticiaModelImpl.ENTITY_CACHE_ENABLED,
+			EnqueteNoticiaModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST, "countByQuestionID",
+			new String[] { Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(EnqueteNoticiaModelImpl.ENTITY_CACHE_ENABLED,
 			EnqueteNoticiaModelImpl.FINDER_CACHE_ENABLED,
 			EnqueteNoticiaImpl.class, FINDER_CLASS_NAME_LIST, "findAll",
@@ -400,6 +416,339 @@ public class EnqueteNoticiaPersistenceImpl extends BasePersistenceImpl<EnqueteNo
 	}
 
 	/**
+	 * Finds all the enquete noticias where pollId = &#63;.
+	 *
+	 * @param pollId the poll ID to search with
+	 * @return the matching enquete noticias
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<EnqueteNoticia> findByQuestionID(long pollId)
+		throws SystemException {
+		return findByQuestionID(pollId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
+	}
+
+	/**
+	 * Finds a range of all the enquete noticias where pollId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param pollId the poll ID to search with
+	 * @param start the lower bound of the range of enquete noticias to return
+	 * @param end the upper bound of the range of enquete noticias to return (not inclusive)
+	 * @return the range of matching enquete noticias
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<EnqueteNoticia> findByQuestionID(long pollId, int start, int end)
+		throws SystemException {
+		return findByQuestionID(pollId, start, end, null);
+	}
+
+	/**
+	 * Finds an ordered range of all the enquete noticias where pollId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param pollId the poll ID to search with
+	 * @param start the lower bound of the range of enquete noticias to return
+	 * @param end the upper bound of the range of enquete noticias to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching enquete noticias
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<EnqueteNoticia> findByQuestionID(long pollId, int start,
+		int end, OrderByComparator orderByComparator) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				pollId,
+				
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
+			};
+
+		List<EnqueteNoticia> list = (List<EnqueteNoticia>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_QUESTIONID,
+				finderArgs, this);
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(2);
+			}
+
+			query.append(_SQL_SELECT_ENQUETENOTICIA_WHERE);
+
+			query.append(_FINDER_COLUMN_QUESTIONID_POLLID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(pollId);
+
+				list = (List<EnqueteNoticia>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_QUESTIONID,
+						finderArgs);
+				}
+				else {
+					cacheResult(list);
+
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_QUESTIONID,
+						finderArgs, list);
+				}
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Finds the first enquete noticia in the ordered set where pollId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param pollId the poll ID to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching enquete noticia
+	 * @throws br.com.seatecnologia.cldf.enquetenoticia.NoSuchEnqueteNoticiaException if a matching enquete noticia could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public EnqueteNoticia findByQuestionID_First(long pollId,
+		OrderByComparator orderByComparator)
+		throws NoSuchEnqueteNoticiaException, SystemException {
+		List<EnqueteNoticia> list = findByQuestionID(pollId, 0, 1,
+				orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("pollId=");
+			msg.append(pollId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchEnqueteNoticiaException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	/**
+	 * Finds the last enquete noticia in the ordered set where pollId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param pollId the poll ID to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching enquete noticia
+	 * @throws br.com.seatecnologia.cldf.enquetenoticia.NoSuchEnqueteNoticiaException if a matching enquete noticia could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public EnqueteNoticia findByQuestionID_Last(long pollId,
+		OrderByComparator orderByComparator)
+		throws NoSuchEnqueteNoticiaException, SystemException {
+		int count = countByQuestionID(pollId);
+
+		List<EnqueteNoticia> list = findByQuestionID(pollId, count - 1, count,
+				orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("pollId=");
+			msg.append(pollId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchEnqueteNoticiaException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	/**
+	 * Finds the enquete noticias before and after the current enquete noticia in the ordered set where pollId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param enqueteNoticiaId the primary key of the current enquete noticia
+	 * @param pollId the poll ID to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next enquete noticia
+	 * @throws br.com.seatecnologia.cldf.enquetenoticia.NoSuchEnqueteNoticiaException if a enquete noticia with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public EnqueteNoticia[] findByQuestionID_PrevAndNext(
+		long enqueteNoticiaId, long pollId, OrderByComparator orderByComparator)
+		throws NoSuchEnqueteNoticiaException, SystemException {
+		EnqueteNoticia enqueteNoticia = findByPrimaryKey(enqueteNoticiaId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			EnqueteNoticia[] array = new EnqueteNoticiaImpl[3];
+
+			array[0] = getByQuestionID_PrevAndNext(session, enqueteNoticia,
+					pollId, orderByComparator, true);
+
+			array[1] = enqueteNoticia;
+
+			array[2] = getByQuestionID_PrevAndNext(session, enqueteNoticia,
+					pollId, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected EnqueteNoticia getByQuestionID_PrevAndNext(Session session,
+		EnqueteNoticia enqueteNoticia, long pollId,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_ENQUETENOTICIA_WHERE);
+
+		query.append(_FINDER_COLUMN_QUESTIONID_POLLID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(pollId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(enqueteNoticia);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<EnqueteNoticia> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
 	 * Finds all the enquete noticias.
 	 *
 	 * @return the enquete noticias
@@ -509,6 +858,18 @@ public class EnqueteNoticiaPersistenceImpl extends BasePersistenceImpl<EnqueteNo
 	}
 
 	/**
+	 * Removes all the enquete noticias where pollId = &#63; from the database.
+	 *
+	 * @param pollId the poll ID to search with
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void removeByQuestionID(long pollId) throws SystemException {
+		for (EnqueteNoticia enqueteNoticia : findByQuestionID(pollId)) {
+			enqueteNoticiaPersistence.remove(enqueteNoticia);
+		}
+	}
+
+	/**
 	 * Removes all the enquete noticias from the database.
 	 *
 	 * @throws SystemException if a system exception occurred
@@ -517,6 +878,59 @@ public class EnqueteNoticiaPersistenceImpl extends BasePersistenceImpl<EnqueteNo
 		for (EnqueteNoticia enqueteNoticia : findAll()) {
 			enqueteNoticiaPersistence.remove(enqueteNoticia);
 		}
+	}
+
+	/**
+	 * Counts all the enquete noticias where pollId = &#63;.
+	 *
+	 * @param pollId the poll ID to search with
+	 * @return the number of matching enquete noticias
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int countByQuestionID(long pollId) throws SystemException {
+		Object[] finderArgs = new Object[] { pollId };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_QUESTIONID,
+				finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_ENQUETENOTICIA_WHERE);
+
+			query.append(_FINDER_COLUMN_QUESTIONID_POLLID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(pollId);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_QUESTIONID,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
 	}
 
 	/**
@@ -597,9 +1011,13 @@ public class EnqueteNoticiaPersistenceImpl extends BasePersistenceImpl<EnqueteNo
 	@BeanReference(type = UserPersistence.class)
 	protected UserPersistence userPersistence;
 	private static final String _SQL_SELECT_ENQUETENOTICIA = "SELECT enqueteNoticia FROM EnqueteNoticia enqueteNoticia";
+	private static final String _SQL_SELECT_ENQUETENOTICIA_WHERE = "SELECT enqueteNoticia FROM EnqueteNoticia enqueteNoticia WHERE ";
 	private static final String _SQL_COUNT_ENQUETENOTICIA = "SELECT COUNT(enqueteNoticia) FROM EnqueteNoticia enqueteNoticia";
+	private static final String _SQL_COUNT_ENQUETENOTICIA_WHERE = "SELECT COUNT(enqueteNoticia) FROM EnqueteNoticia enqueteNoticia WHERE ";
+	private static final String _FINDER_COLUMN_QUESTIONID_POLLID_2 = "enqueteNoticia.pollId = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "enqueteNoticia.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No EnqueteNoticia exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No EnqueteNoticia exists with the key {";
 	private static final boolean _HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE = GetterUtil.getBoolean(PropsUtil.get(
 				PropsKeys.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE));
 	private static Log _log = LogFactoryUtil.getLog(EnqueteNoticiaPersistenceImpl.class);

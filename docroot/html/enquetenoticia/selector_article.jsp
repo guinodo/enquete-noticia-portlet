@@ -11,4 +11,4 @@ JournalArticle art = (JournalArticle)row.getObject();
 
 %>
 
-<input type="checkbox" name="<portlet:namespace/>articleId" value="<%= art.getArticleId() %>" ></input>
+<input type="checkbox" name="<portlet:namespace/>articleId" value="<%= art.getPrimaryKey() %>" ></input>
