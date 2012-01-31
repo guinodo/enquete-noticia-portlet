@@ -17,7 +17,7 @@ package br.com.seatecnologia.cldf.enquetenoticia.model;
 import com.liferay.portal.model.PersistedModel;
 
 /**
- * The extended model interface for the EnqueteNoticia service. Represents a row in the &quot;EnqueteNoticia_EnqueteNoticia&quot; database table, with each column mapped to a property of this class.
+ * The extended model interface for the EnqueteNoticia service. Represents a row in the &quot;EnqueteNoticia&quot; database table, with each column mapped to a property of this class.
  *
  * @author Wallacy, Adan, Eduardo
  * @see EnqueteNoticiaModel

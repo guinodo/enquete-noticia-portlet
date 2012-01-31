@@ -30,7 +30,7 @@ public class EnqueteNoticiaSoap implements Serializable {
 		EnqueteNoticiaSoap soapModel = new EnqueteNoticiaSoap();
 
 		soapModel.setEnqueteNoticiaId(model.getEnqueteNoticiaId());
-		soapModel.setPollId(model.getPollId());
+		soapModel.setQuestionId(model.getQuestionId());
 		soapModel.setArticleId(model.getArticleId());
 
 		return soapModel;
@@ -92,12 +92,12 @@ public class EnqueteNoticiaSoap implements Serializable {
 		_enqueteNoticiaId = enqueteNoticiaId;
 	}
 
-	public long getPollId() {
-		return _pollId;
+	public long getQuestionId() {
+		return _questionId;
 	}
 
-	public void setPollId(long pollId) {
-		_pollId = pollId;
+	public void setQuestionId(long questionId) {
+		_questionId = questionId;
 	}
 
 	public long getArticleId() {
@@ -109,6 +109,6 @@ public class EnqueteNoticiaSoap implements Serializable {
 	}
 
 	private long _enqueteNoticiaId;
-	private long _pollId;
+	private long _questionId;
 	private long _articleId;
 }

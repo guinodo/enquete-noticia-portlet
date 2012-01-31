@@ -10,14 +10,14 @@
 	<mapped-superclass class="br.com.seatecnologia.cldf.enquetenoticia.model.impl.EnqueteNoticiaModelImpl">
 		<attributes>
 			<id name="enqueteNoticiaId" />
-			<basic name="pollId" />
+			<basic name="questionId" />
 			<basic name="articleId" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<entity class="br.com.seatecnologia.cldf.enquetenoticia.model.impl.EnqueteNoticiaImpl" name="EnqueteNoticia">
-		<table name="EnqueteNoticia_EnqueteNoticia" />
+		<table name="EnqueteNoticia" />
 		<attributes />
 	</entity>
 </entity-mappings>

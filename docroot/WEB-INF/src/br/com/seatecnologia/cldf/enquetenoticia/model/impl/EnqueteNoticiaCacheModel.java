@@ -33,8 +33,8 @@ public class EnqueteNoticiaCacheModel implements CacheModel<EnqueteNoticia> {
 
 		sb.append("{enqueteNoticiaId=");
 		sb.append(enqueteNoticiaId);
-		sb.append(", pollId=");
-		sb.append(pollId);
+		sb.append(", questionId=");
+		sb.append(questionId);
 		sb.append(", articleId=");
 		sb.append(articleId);
 		sb.append("}");
@@ -46,7 +46,7 @@ public class EnqueteNoticiaCacheModel implements CacheModel<EnqueteNoticia> {
 		EnqueteNoticiaImpl enqueteNoticiaImpl = new EnqueteNoticiaImpl();
 
 		enqueteNoticiaImpl.setEnqueteNoticiaId(enqueteNoticiaId);
-		enqueteNoticiaImpl.setPollId(pollId);
+		enqueteNoticiaImpl.setQuestionId(questionId);
 		enqueteNoticiaImpl.setArticleId(articleId);
 
 		enqueteNoticiaImpl.resetOriginalValues();
@@ -55,6 +55,6 @@ public class EnqueteNoticiaCacheModel implements CacheModel<EnqueteNoticia> {
 	}
 
 	public long enqueteNoticiaId;
-	public long pollId;
+	public long questionId;
 	public long articleId;
 }

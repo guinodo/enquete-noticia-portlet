@@ -200,44 +200,45 @@ public class EnqueteNoticiaUtil {
 	}
 
 	/**
-	* Finds all the enquete noticias where pollId = &#63;.
+	* Finds all the enquete noticias where questionId = &#63;.
 	*
-	* @param pollId the poll ID to search with
+	* @param questionId the question ID to search with
 	* @return the matching enquete noticias
 	* @throws SystemException if a system exception occurred
 	*/
 	public static java.util.List<br.com.seatecnologia.cldf.enquetenoticia.model.EnqueteNoticia> findByQuestionID(
-		long pollId) throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByQuestionID(pollId);
+		long questionId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByQuestionID(questionId);
 	}
 
 	/**
-	* Finds a range of all the enquete noticias where pollId = &#63;.
+	* Finds a range of all the enquete noticias where questionId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param pollId the poll ID to search with
+	* @param questionId the question ID to search with
 	* @param start the lower bound of the range of enquete noticias to return
 	* @param end the upper bound of the range of enquete noticias to return (not inclusive)
 	* @return the range of matching enquete noticias
 	* @throws SystemException if a system exception occurred
 	*/
 	public static java.util.List<br.com.seatecnologia.cldf.enquetenoticia.model.EnqueteNoticia> findByQuestionID(
-		long pollId, int start, int end)
+		long questionId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByQuestionID(pollId, start, end);
+		return getPersistence().findByQuestionID(questionId, start, end);
 	}
 
 	/**
-	* Finds an ordered range of all the enquete noticias where pollId = &#63;.
+	* Finds an ordered range of all the enquete noticias where questionId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param pollId the poll ID to search with
+	* @param questionId the question ID to search with
 	* @param start the lower bound of the range of enquete noticias to return
 	* @param end the upper bound of the range of enquete noticias to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -245,76 +246,78 @@ public class EnqueteNoticiaUtil {
 	* @throws SystemException if a system exception occurred
 	*/
 	public static java.util.List<br.com.seatecnologia.cldf.enquetenoticia.model.EnqueteNoticia> findByQuestionID(
-		long pollId, int start, int end,
+		long questionId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByQuestionID(pollId, start, end, orderByComparator);
+				   .findByQuestionID(questionId, start, end, orderByComparator);
 	}
 
 	/**
-	* Finds the first enquete noticia in the ordered set where pollId = &#63;.
+	* Finds the first enquete noticia in the ordered set where questionId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param pollId the poll ID to search with
+	* @param questionId the question ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching enquete noticia
 	* @throws br.com.seatecnologia.cldf.enquetenoticia.NoSuchEnqueteNoticiaException if a matching enquete noticia could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static br.com.seatecnologia.cldf.enquetenoticia.model.EnqueteNoticia findByQuestionID_First(
-		long pollId,
+		long questionId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws br.com.seatecnologia.cldf.enquetenoticia.NoSuchEnqueteNoticiaException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByQuestionID_First(pollId, orderByComparator);
+		return getPersistence()
+				   .findByQuestionID_First(questionId, orderByComparator);
 	}
 
 	/**
-	* Finds the last enquete noticia in the ordered set where pollId = &#63;.
+	* Finds the last enquete noticia in the ordered set where questionId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param pollId the poll ID to search with
+	* @param questionId the question ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching enquete noticia
 	* @throws br.com.seatecnologia.cldf.enquetenoticia.NoSuchEnqueteNoticiaException if a matching enquete noticia could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static br.com.seatecnologia.cldf.enquetenoticia.model.EnqueteNoticia findByQuestionID_Last(
-		long pollId,
+		long questionId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws br.com.seatecnologia.cldf.enquetenoticia.NoSuchEnqueteNoticiaException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByQuestionID_Last(pollId, orderByComparator);
+		return getPersistence()
+				   .findByQuestionID_Last(questionId, orderByComparator);
 	}
 
 	/**
-	* Finds the enquete noticias before and after the current enquete noticia in the ordered set where pollId = &#63;.
+	* Finds the enquete noticias before and after the current enquete noticia in the ordered set where questionId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param enqueteNoticiaId the primary key of the current enquete noticia
-	* @param pollId the poll ID to search with
+	* @param questionId the question ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next enquete noticia
 	* @throws br.com.seatecnologia.cldf.enquetenoticia.NoSuchEnqueteNoticiaException if a enquete noticia with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static br.com.seatecnologia.cldf.enquetenoticia.model.EnqueteNoticia[] findByQuestionID_PrevAndNext(
-		long enqueteNoticiaId, long pollId,
+		long enqueteNoticiaId, long questionId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws br.com.seatecnologia.cldf.enquetenoticia.NoSuchEnqueteNoticiaException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByQuestionID_PrevAndNext(enqueteNoticiaId, pollId,
+				   .findByQuestionID_PrevAndNext(enqueteNoticiaId, questionId,
 			orderByComparator);
 	}
 
@@ -368,14 +371,14 @@ public class EnqueteNoticiaUtil {
 	}
 
 	/**
-	* Removes all the enquete noticias where pollId = &#63; from the database.
+	* Removes all the enquete noticias where questionId = &#63; from the database.
 	*
-	* @param pollId the poll ID to search with
+	* @param questionId the question ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
-	public static void removeByQuestionID(long pollId)
+	public static void removeByQuestionID(long questionId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		getPersistence().removeByQuestionID(pollId);
+		getPersistence().removeByQuestionID(questionId);
 	}
 
 	/**
@@ -389,15 +392,15 @@ public class EnqueteNoticiaUtil {
 	}
 
 	/**
-	* Counts all the enquete noticias where pollId = &#63;.
+	* Counts all the enquete noticias where questionId = &#63;.
 	*
-	* @param pollId the poll ID to search with
+	* @param questionId the question ID to search with
 	* @return the number of matching enquete noticias
 	* @throws SystemException if a system exception occurred
 	*/
-	public static int countByQuestionID(long pollId)
+	public static int countByQuestionID(long questionId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().countByQuestionID(pollId);
+		return getPersistence().countByQuestionID(questionId);
 	}
 
 	/**

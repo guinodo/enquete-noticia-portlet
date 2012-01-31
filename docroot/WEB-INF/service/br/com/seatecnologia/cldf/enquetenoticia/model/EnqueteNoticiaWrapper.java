@@ -73,21 +73,21 @@ public class EnqueteNoticiaWrapper implements EnqueteNoticia {
 	}
 
 	/**
-	* Gets the poll ID of this enquete noticia.
+	* Gets the question ID of this enquete noticia.
 	*
-	* @return the poll ID of this enquete noticia
+	* @return the question ID of this enquete noticia
 	*/
-	public long getPollId() {
-		return _enqueteNoticia.getPollId();
+	public long getQuestionId() {
+		return _enqueteNoticia.getQuestionId();
 	}
 
 	/**
-	* Sets the poll ID of this enquete noticia.
+	* Sets the question ID of this enquete noticia.
 	*
-	* @param pollId the poll ID of this enquete noticia
+	* @param questionId the question ID of this enquete noticia
 	*/
-	public void setPollId(long pollId) {
-		_enqueteNoticia.setPollId(pollId);
+	public void setQuestionId(long questionId) {
+		_enqueteNoticia.setQuestionId(questionId);
 	}
 
 	/**

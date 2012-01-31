@@ -65,12 +65,12 @@ public class EnqueteNoticiaClp extends BaseModelImpl<EnqueteNoticia>
 		_enqueteNoticiaId = enqueteNoticiaId;
 	}
 
-	public long getPollId() {
-		return _pollId;
+	public long getQuestionId() {
+		return _questionId;
 	}
 
-	public void setPollId(long pollId) {
-		_pollId = pollId;
+	public void setQuestionId(long questionId) {
+		_questionId = questionId;
 	}
 
 	public long getArticleId() {
@@ -102,7 +102,7 @@ public class EnqueteNoticiaClp extends BaseModelImpl<EnqueteNoticia>
 		EnqueteNoticiaClp clone = new EnqueteNoticiaClp();
 
 		clone.setEnqueteNoticiaId(getEnqueteNoticiaId());
-		clone.setPollId(getPollId());
+		clone.setQuestionId(getQuestionId());
 		clone.setArticleId(getArticleId());
 
 		return clone;
@@ -158,8 +158,8 @@ public class EnqueteNoticiaClp extends BaseModelImpl<EnqueteNoticia>
 
 		sb.append("{enqueteNoticiaId=");
 		sb.append(getEnqueteNoticiaId());
-		sb.append(", pollId=");
-		sb.append(getPollId());
+		sb.append(", questionId=");
+		sb.append(getQuestionId());
 		sb.append(", articleId=");
 		sb.append(getArticleId());
 		sb.append("}");
@@ -180,8 +180,8 @@ public class EnqueteNoticiaClp extends BaseModelImpl<EnqueteNoticia>
 		sb.append(getEnqueteNoticiaId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>pollId</column-name><column-value><![CDATA[");
-		sb.append(getPollId());
+			"<column><column-name>questionId</column-name><column-value><![CDATA[");
+		sb.append(getQuestionId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>articleId</column-name><column-value><![CDATA[");
@@ -194,6 +194,6 @@ public class EnqueteNoticiaClp extends BaseModelImpl<EnqueteNoticia>
 	}
 
 	private long _enqueteNoticiaId;
-	private long _pollId;
+	private long _questionId;
 	private long _articleId;
 }

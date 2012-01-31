@@ -3,7 +3,7 @@
 <model-hints>
 	<model name="br.com.seatecnologia.cldf.enquetenoticia.model.EnqueteNoticia">
 		<field name="enqueteNoticiaId" type="long" />
-		<field name="pollId" type="long" />
+		<field name="questionId" type="long" />
 		<field name="articleId" type="long" />
 	</model>
 </model-hints>

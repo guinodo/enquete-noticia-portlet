@@ -5,12 +5,12 @@
 	<author>Wallacy, Adan, Eduardo</author>
 	<namespace>EnqueteNoticia</namespace>
 
-	<entity name="EnqueteNoticia" local-service="true" remote-service="false">
+	<entity name="EnqueteNoticia" local-service="true" remote-service="false" table="EnqueteNoticia">
 		<column name="enqueteNoticiaId" type="long" primary="true"></column>
-		<column name="pollId" type="long"></column>
+		<column name="questionId" type="long"></column>
 		<column name="articleId" type="long"></column>
 		<finder return-type="Collection" name="QuestionID">
-			<finder-column name="pollId"></finder-column>
+			<finder-column name="questionId"></finder-column>
 		</finder>
 	</entity>
 

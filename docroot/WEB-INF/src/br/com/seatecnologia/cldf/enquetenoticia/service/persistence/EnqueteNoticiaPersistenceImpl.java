@@ -309,7 +309,7 @@ public class EnqueteNoticiaPersistenceImpl extends BasePersistenceImpl<EnqueteNo
 		enqueteNoticiaImpl.setPrimaryKey(enqueteNoticia.getPrimaryKey());
 
 		enqueteNoticiaImpl.setEnqueteNoticiaId(enqueteNoticia.getEnqueteNoticiaId());
-		enqueteNoticiaImpl.setPollId(enqueteNoticia.getPollId());
+		enqueteNoticiaImpl.setQuestionId(enqueteNoticia.getQuestionId());
 		enqueteNoticiaImpl.setArticleId(enqueteNoticia.getArticleId());
 
 		return enqueteNoticiaImpl;
@@ -416,54 +416,54 @@ public class EnqueteNoticiaPersistenceImpl extends BasePersistenceImpl<EnqueteNo
 	}
 
 	/**
-	 * Finds all the enquete noticias where pollId = &#63;.
+	 * Finds all the enquete noticias where questionId = &#63;.
 	 *
-	 * @param pollId the poll ID to search with
+	 * @param questionId the question ID to search with
 	 * @return the matching enquete noticias
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<EnqueteNoticia> findByQuestionID(long pollId)
+	public List<EnqueteNoticia> findByQuestionID(long questionId)
 		throws SystemException {
-		return findByQuestionID(pollId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			null);
+		return findByQuestionID(questionId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Finds a range of all the enquete noticias where pollId = &#63;.
+	 * Finds a range of all the enquete noticias where questionId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param pollId the poll ID to search with
+	 * @param questionId the question ID to search with
 	 * @param start the lower bound of the range of enquete noticias to return
 	 * @param end the upper bound of the range of enquete noticias to return (not inclusive)
 	 * @return the range of matching enquete noticias
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<EnqueteNoticia> findByQuestionID(long pollId, int start, int end)
-		throws SystemException {
-		return findByQuestionID(pollId, start, end, null);
+	public List<EnqueteNoticia> findByQuestionID(long questionId, int start,
+		int end) throws SystemException {
+		return findByQuestionID(questionId, start, end, null);
 	}
 
 	/**
-	 * Finds an ordered range of all the enquete noticias where pollId = &#63;.
+	 * Finds an ordered range of all the enquete noticias where questionId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param pollId the poll ID to search with
+	 * @param questionId the question ID to search with
 	 * @param start the lower bound of the range of enquete noticias to return
 	 * @param end the upper bound of the range of enquete noticias to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by
 	 * @return the ordered range of matching enquete noticias
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<EnqueteNoticia> findByQuestionID(long pollId, int start,
+	public List<EnqueteNoticia> findByQuestionID(long questionId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				pollId,
+				questionId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -485,7 +485,7 @@ public class EnqueteNoticiaPersistenceImpl extends BasePersistenceImpl<EnqueteNo
 
 			query.append(_SQL_SELECT_ENQUETENOTICIA_WHERE);
 
-			query.append(_FINDER_COLUMN_QUESTIONID_POLLID_2);
+			query.append(_FINDER_COLUMN_QUESTIONID_QUESTIONID_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -503,7 +503,7 @@ public class EnqueteNoticiaPersistenceImpl extends BasePersistenceImpl<EnqueteNo
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(pollId);
+				qPos.add(questionId);
 
 				list = (List<EnqueteNoticia>)QueryUtil.list(q, getDialect(),
 						start, end);
@@ -531,22 +531,22 @@ public class EnqueteNoticiaPersistenceImpl extends BasePersistenceImpl<EnqueteNo
 	}
 
 	/**
-	 * Finds the first enquete noticia in the ordered set where pollId = &#63;.
+	 * Finds the first enquete noticia in the ordered set where questionId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param pollId the poll ID to search with
+	 * @param questionId the question ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the first matching enquete noticia
 	 * @throws br.com.seatecnologia.cldf.enquetenoticia.NoSuchEnqueteNoticiaException if a matching enquete noticia could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public EnqueteNoticia findByQuestionID_First(long pollId,
+	public EnqueteNoticia findByQuestionID_First(long questionId,
 		OrderByComparator orderByComparator)
 		throws NoSuchEnqueteNoticiaException, SystemException {
-		List<EnqueteNoticia> list = findByQuestionID(pollId, 0, 1,
+		List<EnqueteNoticia> list = findByQuestionID(questionId, 0, 1,
 				orderByComparator);
 
 		if (list.isEmpty()) {
@@ -554,8 +554,8 @@ public class EnqueteNoticiaPersistenceImpl extends BasePersistenceImpl<EnqueteNo
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("pollId=");
-			msg.append(pollId);
+			msg.append("questionId=");
+			msg.append(questionId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -567,33 +567,33 @@ public class EnqueteNoticiaPersistenceImpl extends BasePersistenceImpl<EnqueteNo
 	}
 
 	/**
-	 * Finds the last enquete noticia in the ordered set where pollId = &#63;.
+	 * Finds the last enquete noticia in the ordered set where questionId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param pollId the poll ID to search with
+	 * @param questionId the question ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the last matching enquete noticia
 	 * @throws br.com.seatecnologia.cldf.enquetenoticia.NoSuchEnqueteNoticiaException if a matching enquete noticia could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public EnqueteNoticia findByQuestionID_Last(long pollId,
+	public EnqueteNoticia findByQuestionID_Last(long questionId,
 		OrderByComparator orderByComparator)
 		throws NoSuchEnqueteNoticiaException, SystemException {
-		int count = countByQuestionID(pollId);
+		int count = countByQuestionID(questionId);
 
-		List<EnqueteNoticia> list = findByQuestionID(pollId, count - 1, count,
-				orderByComparator);
+		List<EnqueteNoticia> list = findByQuestionID(questionId, count - 1,
+				count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("pollId=");
-			msg.append(pollId);
+			msg.append("questionId=");
+			msg.append(questionId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -605,21 +605,22 @@ public class EnqueteNoticiaPersistenceImpl extends BasePersistenceImpl<EnqueteNo
 	}
 
 	/**
-	 * Finds the enquete noticias before and after the current enquete noticia in the ordered set where pollId = &#63;.
+	 * Finds the enquete noticias before and after the current enquete noticia in the ordered set where questionId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param enqueteNoticiaId the primary key of the current enquete noticia
-	 * @param pollId the poll ID to search with
+	 * @param questionId the question ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the previous, current, and next enquete noticia
 	 * @throws br.com.seatecnologia.cldf.enquetenoticia.NoSuchEnqueteNoticiaException if a enquete noticia with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public EnqueteNoticia[] findByQuestionID_PrevAndNext(
-		long enqueteNoticiaId, long pollId, OrderByComparator orderByComparator)
+		long enqueteNoticiaId, long questionId,
+		OrderByComparator orderByComparator)
 		throws NoSuchEnqueteNoticiaException, SystemException {
 		EnqueteNoticia enqueteNoticia = findByPrimaryKey(enqueteNoticiaId);
 
@@ -631,12 +632,12 @@ public class EnqueteNoticiaPersistenceImpl extends BasePersistenceImpl<EnqueteNo
 			EnqueteNoticia[] array = new EnqueteNoticiaImpl[3];
 
 			array[0] = getByQuestionID_PrevAndNext(session, enqueteNoticia,
-					pollId, orderByComparator, true);
+					questionId, orderByComparator, true);
 
 			array[1] = enqueteNoticia;
 
 			array[2] = getByQuestionID_PrevAndNext(session, enqueteNoticia,
-					pollId, orderByComparator, false);
+					questionId, orderByComparator, false);
 
 			return array;
 		}
@@ -649,7 +650,7 @@ public class EnqueteNoticiaPersistenceImpl extends BasePersistenceImpl<EnqueteNo
 	}
 
 	protected EnqueteNoticia getByQuestionID_PrevAndNext(Session session,
-		EnqueteNoticia enqueteNoticia, long pollId,
+		EnqueteNoticia enqueteNoticia, long questionId,
 		OrderByComparator orderByComparator, boolean previous) {
 		StringBundler query = null;
 
@@ -663,7 +664,7 @@ public class EnqueteNoticiaPersistenceImpl extends BasePersistenceImpl<EnqueteNo
 
 		query.append(_SQL_SELECT_ENQUETENOTICIA_WHERE);
 
-		query.append(_FINDER_COLUMN_QUESTIONID_POLLID_2);
+		query.append(_FINDER_COLUMN_QUESTIONID_QUESTIONID_2);
 
 		if (orderByComparator != null) {
 			String[] orderByFields = orderByComparator.getOrderByFields();
@@ -728,7 +729,7 @@ public class EnqueteNoticiaPersistenceImpl extends BasePersistenceImpl<EnqueteNo
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		qPos.add(pollId);
+		qPos.add(questionId);
 
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByValues(enqueteNoticia);
@@ -858,13 +859,13 @@ public class EnqueteNoticiaPersistenceImpl extends BasePersistenceImpl<EnqueteNo
 	}
 
 	/**
-	 * Removes all the enquete noticias where pollId = &#63; from the database.
+	 * Removes all the enquete noticias where questionId = &#63; from the database.
 	 *
-	 * @param pollId the poll ID to search with
+	 * @param questionId the question ID to search with
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void removeByQuestionID(long pollId) throws SystemException {
-		for (EnqueteNoticia enqueteNoticia : findByQuestionID(pollId)) {
+	public void removeByQuestionID(long questionId) throws SystemException {
+		for (EnqueteNoticia enqueteNoticia : findByQuestionID(questionId)) {
 			enqueteNoticiaPersistence.remove(enqueteNoticia);
 		}
 	}
@@ -881,14 +882,14 @@ public class EnqueteNoticiaPersistenceImpl extends BasePersistenceImpl<EnqueteNo
 	}
 
 	/**
-	 * Counts all the enquete noticias where pollId = &#63;.
+	 * Counts all the enquete noticias where questionId = &#63;.
 	 *
-	 * @param pollId the poll ID to search with
+	 * @param questionId the question ID to search with
 	 * @return the number of matching enquete noticias
 	 * @throws SystemException if a system exception occurred
 	 */
-	public int countByQuestionID(long pollId) throws SystemException {
-		Object[] finderArgs = new Object[] { pollId };
+	public int countByQuestionID(long questionId) throws SystemException {
+		Object[] finderArgs = new Object[] { questionId };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_QUESTIONID,
 				finderArgs, this);
@@ -898,7 +899,7 @@ public class EnqueteNoticiaPersistenceImpl extends BasePersistenceImpl<EnqueteNo
 
 			query.append(_SQL_COUNT_ENQUETENOTICIA_WHERE);
 
-			query.append(_FINDER_COLUMN_QUESTIONID_POLLID_2);
+			query.append(_FINDER_COLUMN_QUESTIONID_QUESTIONID_2);
 
 			String sql = query.toString();
 
@@ -911,7 +912,7 @@ public class EnqueteNoticiaPersistenceImpl extends BasePersistenceImpl<EnqueteNo
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(pollId);
+				qPos.add(questionId);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1014,7 +1015,7 @@ public class EnqueteNoticiaPersistenceImpl extends BasePersistenceImpl<EnqueteNo
 	private static final String _SQL_SELECT_ENQUETENOTICIA_WHERE = "SELECT enqueteNoticia FROM EnqueteNoticia enqueteNoticia WHERE ";
 	private static final String _SQL_COUNT_ENQUETENOTICIA = "SELECT COUNT(enqueteNoticia) FROM EnqueteNoticia enqueteNoticia";
 	private static final String _SQL_COUNT_ENQUETENOTICIA_WHERE = "SELECT COUNT(enqueteNoticia) FROM EnqueteNoticia enqueteNoticia WHERE ";
-	private static final String _FINDER_COLUMN_QUESTIONID_POLLID_2 = "enqueteNoticia.pollId = ?";
+	private static final String _FINDER_COLUMN_QUESTIONID_QUESTIONID_2 = "enqueteNoticia.questionId = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "enqueteNoticia.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No EnqueteNoticia exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No EnqueteNoticia exists with the key {";
