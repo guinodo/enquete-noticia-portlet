@@ -24,7 +24,7 @@ package br.com.seatecnologia.cldf.enquetenoticia.model.impl;
  * @author Wallacy, Adan, Eduardo
  */
 public class EnqueteNoticiaImpl extends EnqueteNoticiaBaseImpl {
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never reference this class directly. All methods that expect a enquete noticia model instance should use the {@link br.com.seatecnologia.cldf.enquetenoticia.model.EnqueteNoticia} interface instead.

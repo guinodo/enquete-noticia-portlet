@@ -211,6 +211,44 @@ public interface EnqueteNoticiaPersistence extends BasePersistence<EnqueteNotici
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Finds the enquete noticia where questionId = &#63; and articleId = &#63; or throws a {@link br.com.seatecnologia.cldf.enquetenoticia.NoSuchEnqueteNoticiaException} if it could not be found.
+	*
+	* @param questionId the question ID to search with
+	* @param articleId the article ID to search with
+	* @return the matching enquete noticia
+	* @throws br.com.seatecnologia.cldf.enquetenoticia.NoSuchEnqueteNoticiaException if a matching enquete noticia could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public br.com.seatecnologia.cldf.enquetenoticia.model.EnqueteNoticia findByEnqueteNoticiaID(
+		long questionId, long articleId)
+		throws br.com.seatecnologia.cldf.enquetenoticia.NoSuchEnqueteNoticiaException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Finds the enquete noticia where questionId = &#63; and articleId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param questionId the question ID to search with
+	* @param articleId the article ID to search with
+	* @return the matching enquete noticia, or <code>null</code> if a matching enquete noticia could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public br.com.seatecnologia.cldf.enquetenoticia.model.EnqueteNoticia fetchByEnqueteNoticiaID(
+		long questionId, long articleId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Finds the enquete noticia where questionId = &#63; and articleId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param questionId the question ID to search with
+	* @param articleId the article ID to search with
+	* @return the matching enquete noticia, or <code>null</code> if a matching enquete noticia could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public br.com.seatecnologia.cldf.enquetenoticia.model.EnqueteNoticia fetchByEnqueteNoticiaID(
+		long questionId, long articleId, boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Finds all the enquete noticias.
 	*
 	* @return the enquete noticias
@@ -263,6 +301,17 @@ public interface EnqueteNoticiaPersistence extends BasePersistence<EnqueteNotici
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Removes the enquete noticia where questionId = &#63; and articleId = &#63; from the database.
+	*
+	* @param questionId the question ID to search with
+	* @param articleId the article ID to search with
+	* @throws SystemException if a system exception occurred
+	*/
+	public void removeByEnqueteNoticiaID(long questionId, long articleId)
+		throws br.com.seatecnologia.cldf.enquetenoticia.NoSuchEnqueteNoticiaException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Removes all the enquete noticias from the database.
 	*
 	* @throws SystemException if a system exception occurred
@@ -278,6 +327,17 @@ public interface EnqueteNoticiaPersistence extends BasePersistence<EnqueteNotici
 	* @throws SystemException if a system exception occurred
 	*/
 	public int countByQuestionID(long questionId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Counts all the enquete noticias where questionId = &#63; and articleId = &#63;.
+	*
+	* @param questionId the question ID to search with
+	* @param articleId the article ID to search with
+	* @return the number of matching enquete noticias
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByEnqueteNoticiaID(long questionId, long articleId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**

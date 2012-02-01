@@ -3,6 +3,7 @@ package br.com.seatecnologia.cldf.enquetenoticia;
 import br.com.seatecnologia.cldf.enquetenoticia.model.EnqueteNoticia;
 import br.com.seatecnologia.cldf.enquetenoticia.model.impl.EnqueteNoticiaImpl;
 import br.com.seatecnologia.cldf.enquetenoticia.service.EnqueteNoticiaLocalServiceUtil;
+import br.com.seatecnologia.cldf.enquetenoticia.service.persistence.EnqueteNoticiaUtil;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -17,31 +18,38 @@ import javax.portlet.ActionResponse;
  * Portlet implementation class EnqueteNoticiaPortlet
  */
 public class EnqueteNoticiaPortlet extends MVCPortlet {
-	
+
 	public void associatePollArticle(ActionRequest request, ActionResponse response) throws SystemException, IOException{
-		
+
 		String questionId = request.getParameter("questionId");
-		System.out.println("Question ID: "+ questionId);
 		String[] articleIds = request.getParameterValues("articleId");
-		
+
 		for (String articleId : articleIds) {
-			System.out.println("Article ID: " + articleId);
+
 			EnqueteNoticia enqueteNoticia = new EnqueteNoticiaImpl();
 			enqueteNoticia.setArticleId(Long.parseLong(articleId));
 			enqueteNoticia.setQuestionId(Long.parseLong(questionId));
 			enqueteNoticia.setEnqueteNoticiaId(CounterLocalServiceUtil.increment(EnqueteNoticia.class.getName()));
 			EnqueteNoticiaLocalServiceUtil.addEnqueteNoticia(enqueteNoticia);
-			
+
 			sendRedirect(request, response);
 		}
-			
-		
-		
-		
+
 	}
-	
-	
-	
- 
+	public void removeAssociatePollArticle(ActionRequest request, ActionResponse response) throws SystemException, IOException, NoSuchEnqueteNoticiaException, NumberFormatException{
+
+		String questionId = request.getParameter("questionId");
+		String[] articleIds = request.getParameterValues("articleId");
+
+		for (String articleId : articleIds) {
+
+			EnqueteNoticia enqueteNoticia = EnqueteNoticiaUtil.findByEnqueteNoticiaID(Long.parseLong(questionId), Long.parseLong(articleId));
+			EnqueteNoticiaLocalServiceUtil.deleteEnqueteNoticia(enqueteNoticia);
+
+			sendRedirect(request, response);
+
+		}
+
+	}
 
 }

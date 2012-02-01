@@ -1,6 +1,6 @@
-<%@page import="com.liferay.portlet.polls.model.PollsQuestion"%>
-<%@page import="com.liferay.portal.kernel.util.WebKeys"%>
-<%@page import="com.liferay.portal.kernel.dao.search.ResultRow"%>
+<%@ page import="com.liferay.portlet.polls.model.PollsQuestion" %>
+<%@ page import="com.liferay.portal.kernel.util.WebKeys" %>
+<%@ page import="com.liferay.portal.kernel.dao.search.ResultRow" %>
 <%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %>
 
 <%

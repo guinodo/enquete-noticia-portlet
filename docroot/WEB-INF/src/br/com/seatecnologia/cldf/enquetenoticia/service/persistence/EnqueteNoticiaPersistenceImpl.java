@@ -89,6 +89,15 @@ public class EnqueteNoticiaPersistenceImpl extends BasePersistenceImpl<EnqueteNo
 			EnqueteNoticiaModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST, "countByQuestionID",
 			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_ENQUETENOTICIAID = new FinderPath(EnqueteNoticiaModelImpl.ENTITY_CACHE_ENABLED,
+			EnqueteNoticiaModelImpl.FINDER_CACHE_ENABLED,
+			EnqueteNoticiaImpl.class, FINDER_CLASS_NAME_ENTITY,
+			"fetchByEnqueteNoticiaID",
+			new String[] { Long.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_ENQUETENOTICIAID = new FinderPath(EnqueteNoticiaModelImpl.ENTITY_CACHE_ENABLED,
+			EnqueteNoticiaModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST, "countByEnqueteNoticiaID",
+			new String[] { Long.class.getName(), Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(EnqueteNoticiaModelImpl.ENTITY_CACHE_ENABLED,
 			EnqueteNoticiaModelImpl.FINDER_CACHE_ENABLED,
 			EnqueteNoticiaImpl.class, FINDER_CLASS_NAME_LIST, "findAll",
@@ -106,6 +115,12 @@ public class EnqueteNoticiaPersistenceImpl extends BasePersistenceImpl<EnqueteNo
 		EntityCacheUtil.putResult(EnqueteNoticiaModelImpl.ENTITY_CACHE_ENABLED,
 			EnqueteNoticiaImpl.class, enqueteNoticia.getPrimaryKey(),
 			enqueteNoticia);
+
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_ENQUETENOTICIAID,
+			new Object[] {
+				Long.valueOf(enqueteNoticia.getQuestionId()),
+				Long.valueOf(enqueteNoticia.getArticleId())
+			}, enqueteNoticia);
 
 		enqueteNoticia.resetOriginalValues();
 	}
@@ -155,6 +170,12 @@ public class EnqueteNoticiaPersistenceImpl extends BasePersistenceImpl<EnqueteNo
 	public void clearCache(EnqueteNoticia enqueteNoticia) {
 		EntityCacheUtil.removeResult(EnqueteNoticiaModelImpl.ENTITY_CACHE_ENABLED,
 			EnqueteNoticiaImpl.class, enqueteNoticia.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_ENQUETENOTICIAID,
+			new Object[] {
+				Long.valueOf(enqueteNoticia.getQuestionId()),
+				Long.valueOf(enqueteNoticia.getArticleId())
+			});
 	}
 
 	/**
@@ -261,6 +282,14 @@ public class EnqueteNoticiaPersistenceImpl extends BasePersistenceImpl<EnqueteNo
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
+		EnqueteNoticiaModelImpl enqueteNoticiaModelImpl = (EnqueteNoticiaModelImpl)enqueteNoticia;
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_ENQUETENOTICIAID,
+			new Object[] {
+				Long.valueOf(enqueteNoticiaModelImpl.getQuestionId()),
+				Long.valueOf(enqueteNoticiaModelImpl.getArticleId())
+			});
+
 		EntityCacheUtil.removeResult(EnqueteNoticiaModelImpl.ENTITY_CACHE_ENABLED,
 			EnqueteNoticiaImpl.class, enqueteNoticia.getPrimaryKey());
 
@@ -272,6 +301,10 @@ public class EnqueteNoticiaPersistenceImpl extends BasePersistenceImpl<EnqueteNo
 		br.com.seatecnologia.cldf.enquetenoticia.model.EnqueteNoticia enqueteNoticia,
 		boolean merge) throws SystemException {
 		enqueteNoticia = toUnwrappedModel(enqueteNoticia);
+
+		boolean isNew = enqueteNoticia.isNew();
+
+		EnqueteNoticiaModelImpl enqueteNoticiaModelImpl = (EnqueteNoticiaModelImpl)enqueteNoticia;
 
 		Session session = null;
 
@@ -294,6 +327,27 @@ public class EnqueteNoticiaPersistenceImpl extends BasePersistenceImpl<EnqueteNo
 		EntityCacheUtil.putResult(EnqueteNoticiaModelImpl.ENTITY_CACHE_ENABLED,
 			EnqueteNoticiaImpl.class, enqueteNoticia.getPrimaryKey(),
 			enqueteNoticia);
+
+		if (!isNew &&
+				((enqueteNoticia.getQuestionId() != enqueteNoticiaModelImpl.getOriginalQuestionId()) ||
+				(enqueteNoticia.getArticleId() != enqueteNoticiaModelImpl.getOriginalArticleId()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_ENQUETENOTICIAID,
+				new Object[] {
+					Long.valueOf(
+						enqueteNoticiaModelImpl.getOriginalQuestionId()),
+					Long.valueOf(enqueteNoticiaModelImpl.getOriginalArticleId())
+				});
+		}
+
+		if (isNew ||
+				((enqueteNoticia.getQuestionId() != enqueteNoticiaModelImpl.getOriginalQuestionId()) ||
+				(enqueteNoticia.getArticleId() != enqueteNoticiaModelImpl.getOriginalArticleId()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_ENQUETENOTICIAID,
+				new Object[] {
+					Long.valueOf(enqueteNoticia.getQuestionId()),
+					Long.valueOf(enqueteNoticia.getArticleId())
+				}, enqueteNoticia);
+		}
 
 		return enqueteNoticia;
 	}
@@ -750,6 +804,145 @@ public class EnqueteNoticiaPersistenceImpl extends BasePersistenceImpl<EnqueteNo
 	}
 
 	/**
+	 * Finds the enquete noticia where questionId = &#63; and articleId = &#63; or throws a {@link br.com.seatecnologia.cldf.enquetenoticia.NoSuchEnqueteNoticiaException} if it could not be found.
+	 *
+	 * @param questionId the question ID to search with
+	 * @param articleId the article ID to search with
+	 * @return the matching enquete noticia
+	 * @throws br.com.seatecnologia.cldf.enquetenoticia.NoSuchEnqueteNoticiaException if a matching enquete noticia could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public EnqueteNoticia findByEnqueteNoticiaID(long questionId, long articleId)
+		throws NoSuchEnqueteNoticiaException, SystemException {
+		EnqueteNoticia enqueteNoticia = fetchByEnqueteNoticiaID(questionId,
+				articleId);
+
+		if (enqueteNoticia == null) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("questionId=");
+			msg.append(questionId);
+
+			msg.append(", articleId=");
+			msg.append(articleId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchEnqueteNoticiaException(msg.toString());
+		}
+
+		return enqueteNoticia;
+	}
+
+	/**
+	 * Finds the enquete noticia where questionId = &#63; and articleId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param questionId the question ID to search with
+	 * @param articleId the article ID to search with
+	 * @return the matching enquete noticia, or <code>null</code> if a matching enquete noticia could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public EnqueteNoticia fetchByEnqueteNoticiaID(long questionId,
+		long articleId) throws SystemException {
+		return fetchByEnqueteNoticiaID(questionId, articleId, true);
+	}
+
+	/**
+	 * Finds the enquete noticia where questionId = &#63; and articleId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param questionId the question ID to search with
+	 * @param articleId the article ID to search with
+	 * @return the matching enquete noticia, or <code>null</code> if a matching enquete noticia could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public EnqueteNoticia fetchByEnqueteNoticiaID(long questionId,
+		long articleId, boolean retrieveFromCache) throws SystemException {
+		Object[] finderArgs = new Object[] { questionId, articleId };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_ENQUETENOTICIAID,
+					finderArgs, this);
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_SELECT_ENQUETENOTICIA_WHERE);
+
+			query.append(_FINDER_COLUMN_ENQUETENOTICIAID_QUESTIONID_2);
+
+			query.append(_FINDER_COLUMN_ENQUETENOTICIAID_ARTICLEID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(questionId);
+
+				qPos.add(articleId);
+
+				List<EnqueteNoticia> list = q.list();
+
+				result = list;
+
+				EnqueteNoticia enqueteNoticia = null;
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_ENQUETENOTICIAID,
+						finderArgs, list);
+				}
+				else {
+					enqueteNoticia = list.get(0);
+
+					cacheResult(enqueteNoticia);
+
+					if ((enqueteNoticia.getQuestionId() != questionId) ||
+							(enqueteNoticia.getArticleId() != articleId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_ENQUETENOTICIAID,
+							finderArgs, enqueteNoticia);
+					}
+				}
+
+				return enqueteNoticia;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (result == null) {
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_ENQUETENOTICIAID,
+						finderArgs);
+				}
+
+				closeSession(session);
+			}
+		}
+		else {
+			if (result instanceof List<?>) {
+				return null;
+			}
+			else {
+				return (EnqueteNoticia)result;
+			}
+		}
+	}
+
+	/**
 	 * Finds all the enquete noticias.
 	 *
 	 * @return the enquete noticias
@@ -871,6 +1064,21 @@ public class EnqueteNoticiaPersistenceImpl extends BasePersistenceImpl<EnqueteNo
 	}
 
 	/**
+	 * Removes the enquete noticia where questionId = &#63; and articleId = &#63; from the database.
+	 *
+	 * @param questionId the question ID to search with
+	 * @param articleId the article ID to search with
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void removeByEnqueteNoticiaID(long questionId, long articleId)
+		throws NoSuchEnqueteNoticiaException, SystemException {
+		EnqueteNoticia enqueteNoticia = findByEnqueteNoticiaID(questionId,
+				articleId);
+
+		enqueteNoticiaPersistence.remove(enqueteNoticia);
+	}
+
+	/**
 	 * Removes all the enquete noticias from the database.
 	 *
 	 * @throws SystemException if a system exception occurred
@@ -925,6 +1133,65 @@ public class EnqueteNoticiaPersistenceImpl extends BasePersistenceImpl<EnqueteNo
 				}
 
 				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_QUESTIONID,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
+	 * Counts all the enquete noticias where questionId = &#63; and articleId = &#63;.
+	 *
+	 * @param questionId the question ID to search with
+	 * @param articleId the article ID to search with
+	 * @return the number of matching enquete noticias
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int countByEnqueteNoticiaID(long questionId, long articleId)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { questionId, articleId };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_ENQUETENOTICIAID,
+				finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_ENQUETENOTICIA_WHERE);
+
+			query.append(_FINDER_COLUMN_ENQUETENOTICIAID_QUESTIONID_2);
+
+			query.append(_FINDER_COLUMN_ENQUETENOTICIAID_ARTICLEID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(questionId);
+
+				qPos.add(articleId);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_ENQUETENOTICIAID,
 					finderArgs, count);
 
 				closeSession(session);
@@ -1016,6 +1283,8 @@ public class EnqueteNoticiaPersistenceImpl extends BasePersistenceImpl<EnqueteNo
 	private static final String _SQL_COUNT_ENQUETENOTICIA = "SELECT COUNT(enqueteNoticia) FROM EnqueteNoticia enqueteNoticia";
 	private static final String _SQL_COUNT_ENQUETENOTICIA_WHERE = "SELECT COUNT(enqueteNoticia) FROM EnqueteNoticia enqueteNoticia WHERE ";
 	private static final String _FINDER_COLUMN_QUESTIONID_QUESTIONID_2 = "enqueteNoticia.questionId = ?";
+	private static final String _FINDER_COLUMN_ENQUETENOTICIAID_QUESTIONID_2 = "enqueteNoticia.questionId = ? AND ";
+	private static final String _FINDER_COLUMN_ENQUETENOTICIAID_ARTICLEID_2 = "enqueteNoticia.articleId = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "enqueteNoticia.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No EnqueteNoticia exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No EnqueteNoticia exists with the key {";

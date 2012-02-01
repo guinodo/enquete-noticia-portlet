@@ -114,7 +114,17 @@ public class EnqueteNoticiaModelImpl extends BaseModelImpl<EnqueteNoticia>
 	}
 
 	public void setQuestionId(long questionId) {
+		if (!_setOriginalQuestionId) {
+			_setOriginalQuestionId = true;
+
+			_originalQuestionId = _questionId;
+		}
+
 		_questionId = questionId;
+	}
+
+	public long getOriginalQuestionId() {
+		return _originalQuestionId;
 	}
 
 	public long getArticleId() {
@@ -122,7 +132,17 @@ public class EnqueteNoticiaModelImpl extends BaseModelImpl<EnqueteNoticia>
 	}
 
 	public void setArticleId(long articleId) {
+		if (!_setOriginalArticleId) {
+			_setOriginalArticleId = true;
+
+			_originalArticleId = _articleId;
+		}
+
 		_articleId = articleId;
+	}
+
+	public long getOriginalArticleId() {
+		return _originalArticleId;
 	}
 
 	@Override
@@ -215,6 +235,15 @@ public class EnqueteNoticiaModelImpl extends BaseModelImpl<EnqueteNoticia>
 
 	@Override
 	public void resetOriginalValues() {
+		EnqueteNoticiaModelImpl enqueteNoticiaModelImpl = this;
+
+		enqueteNoticiaModelImpl._originalQuestionId = enqueteNoticiaModelImpl._questionId;
+
+		enqueteNoticiaModelImpl._setOriginalQuestionId = false;
+
+		enqueteNoticiaModelImpl._originalArticleId = enqueteNoticiaModelImpl._articleId;
+
+		enqueteNoticiaModelImpl._setOriginalArticleId = false;
 	}
 
 	@Override
@@ -277,7 +306,11 @@ public class EnqueteNoticiaModelImpl extends BaseModelImpl<EnqueteNoticia>
 		};
 	private long _enqueteNoticiaId;
 	private long _questionId;
+	private long _originalQuestionId;
+	private boolean _setOriginalQuestionId;
 	private long _articleId;
+	private long _originalArticleId;
+	private boolean _setOriginalArticleId;
 	private transient ExpandoBridge _expandoBridge;
 	private EnqueteNoticia _escapedModelProxy;
 }

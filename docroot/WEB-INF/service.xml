@@ -12,6 +12,10 @@
 		<finder return-type="Collection" name="QuestionID">
 			<finder-column name="questionId"></finder-column>
 		</finder>
+		<finder return-type="EnqueteNoticia" name="EnqueteNoticiaID">
+			<finder-column name="questionId"></finder-column>
+			<finder-column name="articleId"></finder-column>
+		</finder>
 	</entity>
 
 

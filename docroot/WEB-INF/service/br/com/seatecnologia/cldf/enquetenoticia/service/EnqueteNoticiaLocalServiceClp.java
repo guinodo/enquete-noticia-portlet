@@ -90,6 +90,9 @@ public class EnqueteNoticiaLocalServiceClp implements EnqueteNoticiaLocalService
 
 		_countByQuestionIdMethodKey17 = new MethodKey(_classLoaderProxy.getClassName(),
 				"countByQuestionId", long.class);
+
+		_getNoticiasNaoAssociadasMethodKey18 = new MethodKey(_classLoaderProxy.getClassName(),
+				"getNoticiasNaoAssociadas", long.class, int.class, int.class);
 	}
 
 	public br.com.seatecnologia.cldf.enquetenoticia.model.EnqueteNoticia addEnqueteNoticia(
@@ -589,6 +592,39 @@ public class EnqueteNoticiaLocalServiceClp implements EnqueteNoticiaLocalService
 		return ((Integer)returnObj).intValue();
 	}
 
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> getNoticiasNaoAssociadas(
+		long questionId, int start, int end)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		MethodHandler methodHandler = new MethodHandler(_getNoticiasNaoAssociadasMethodKey18,
+				questionId, start, end);
+
+		try {
+			returnObj = _classLoaderProxy.invoke(methodHandler);
+		}
+		catch (Throwable t) {
+			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+				throw (com.liferay.portal.kernel.exception.PortalException)t;
+			}
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.liferay.portlet.journal.model.JournalArticle>)ClpSerializer.translateOutput(returnObj);
+	}
+
 	public ClassLoaderProxy getClassLoaderProxy() {
 		return _classLoaderProxy;
 	}
@@ -612,4 +648,5 @@ public class EnqueteNoticiaLocalServiceClp implements EnqueteNoticiaLocalService
 	private MethodKey _setBeanIdentifierMethodKey15;
 	private MethodKey _getNoticiasAssociadasMethodKey16;
 	private MethodKey _countByQuestionIdMethodKey17;
+	private MethodKey _getNoticiasNaoAssociadasMethodKey18;
 }

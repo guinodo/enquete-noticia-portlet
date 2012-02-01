@@ -256,6 +256,14 @@ public class EnqueteNoticiaLocalServiceUtil {
 		getService().setBeanIdentifier(beanIdentifier);
 	}
 
+	/**
+	* NOTE FOR DEVELOPERS:
+	*
+	* Never reference this interface directly. Always use {@link
+	* br.com.seatecnologia
+	* .cldf.enquetenoticia.service.EnqueteNoticiaLocalServiceUtil} to access
+	* the enquete noticia local service.
+	*/
 	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> getNoticiasAssociadas(
 		long questionId, int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -266,6 +274,13 @@ public class EnqueteNoticiaLocalServiceUtil {
 	public static int countByQuestionId(long questionId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().countByQuestionId(questionId);
+	}
+
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> getNoticiasNaoAssociadas(
+		long questionId, int start, int end)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getNoticiasNaoAssociadas(questionId, start, end);
 	}
 
 	public static void clearService() {

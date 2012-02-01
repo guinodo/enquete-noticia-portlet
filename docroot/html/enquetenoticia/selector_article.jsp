@@ -1,7 +1,7 @@
-<%@page import="com.liferay.portlet.journal.model.JournalArticle"%>
-<%@page import="com.liferay.portlet.polls.model.PollsQuestion"%>
-<%@page import="com.liferay.portal.kernel.util.WebKeys"%>
-<%@page import="com.liferay.portal.kernel.dao.search.ResultRow"%>
+<%@ page import="com.liferay.portlet.journal.model.JournalArticle" %>
+<%@ page import="com.liferay.portlet.polls.model.PollsQuestion" %>
+<%@ page import="com.liferay.portal.kernel.util.WebKeys" %>
+<%@ page import="com.liferay.portal.kernel.dao.search.ResultRow" %>
 <%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %>
 <%@ taglib uri="http://java.sun.com/portlet" prefix="portlet" %>
 <%
@@ -11,4 +11,4 @@ JournalArticle art = (JournalArticle)row.getObject();
 
 %>
 
-<input type="checkbox" name="<portlet:namespace/>articleId" value="<%= art.getPrimaryKey() %>" ></input>
+<input type="checkbox" name="<portlet:namespace/>articleId" value="<%= art.getPrimaryKey() %>"></input>

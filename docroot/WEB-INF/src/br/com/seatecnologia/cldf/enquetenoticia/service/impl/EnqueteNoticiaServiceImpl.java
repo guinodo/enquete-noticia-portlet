@@ -31,7 +31,7 @@ import br.com.seatecnologia.cldf.enquetenoticia.service.base.EnqueteNoticiaServi
  * @see br.com.seatecnologia.cldf.enquetenoticia.service.EnqueteNoticiaServiceUtil
  */
 public class EnqueteNoticiaServiceImpl extends EnqueteNoticiaServiceBaseImpl {
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never reference this interface directly. Always use {@link br.com.seatecnologia.cldf.enquetenoticia.service.EnqueteNoticiaServiceUtil} to access the enquete noticia remote service.
