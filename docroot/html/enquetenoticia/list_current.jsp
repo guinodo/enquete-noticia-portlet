@@ -1,5 +1,7 @@
+<liferay-ui:error key="nenhum-artigo-selecionado" message="nenhum-artigo-selecionado" />
+
 <aui:input name="questionId" type="hidden" value="<%= questionId %>"></aui:input>
-<aui:input name="redirect" type="hidden" value="<%= PortalUtil.getCurrentURL(renderRequest) %>"></aui:input>
+<aui:input name="redirect" type="hidden" value="<%= currentURL %>"></aui:input>
 
 <h2>
 	<liferay-ui:message key="noticias-ja-associadas"></liferay-ui:message>

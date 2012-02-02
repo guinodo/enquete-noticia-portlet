@@ -18,15 +18,14 @@
 
 <%
 	long questionId = ParamUtil.getLong(request, "questionId");
-	String questionTitle = ParamUtil
-			.getString(request, "questionTitle");
+	String questionTitle = ParamUtil.getString(request, "questionTitle");
 
-	String currentTitle = "Exibindo as Noticias associadas a enquete: "
-			+ questionTitle;
-	String avaliableTitle = "Exibindo as Noticias disponiveis para a enquete:"
-			+ questionTitle;
+	String currentTitle = "Exibindo as Noticias associadas a enquete: " + questionTitle;
+	String avaliableTitle = "Exibindo as Noticias disponiveis para a enquete:" + questionTitle;
 
 	String redirectURL = renderRequest.getParameter("redirect");
+	String currentURL = PortalUtil.getCurrentURL(renderRequest);
+	
 	if (redirectURL == null) {
 		redirectURL = PortalUtil.getCurrentURL(renderRequest);
 	}
@@ -52,7 +51,7 @@
 						<%@ include file="/html/enquetenoticia/list_question.jsp"%>
 					</c:when>
 					<c:otherwise>
-						<%@ include file="/html/enquetenoticia/current_questionId.jsp"%>
+						<%@ include file="/html/enquetenoticia/list_current.jsp"%>
 					</c:otherwise>
 				</c:choose>
 				<aui:button type="submit" value='remove'></aui:button>
@@ -71,3 +70,10 @@
 		</div>
 	</liferay-ui:section>
 </liferay-ui:tabs>
+<aui:script>
+var handleClick = function(e) {
+validator.validate();
+if(!validator.hasErrors())
+A.io('<%= currentURL %>', cfg);
+}
+</aui:script>

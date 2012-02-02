@@ -70,6 +70,7 @@ public class EnqueteNoticiaLocalServiceImpl extends
 			JournalArticle article = JournalArticleLocalServiceUtil
 					.getArticle(articleId);
 			listaArtigos.add(article);
+
 		}
 		return listaArtigos;
 

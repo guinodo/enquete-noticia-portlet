@@ -26,11 +26,14 @@ public class EnqueteNoticiaPortlet extends MVCPortlet {
 		String questionId = request.getParameter("questionId");
 		String[] articleIds = request.getParameterValues("articleId");
 		
-		if (articleIds.length == 0){
+		if (articleIds.length == 0 || articleIds == null){
 			SessionErrors.add(request, "nenhum-artigo-selecionado");
+			sendRedirect(request, response);
+
 		}
 
 		for (String articleId : articleIds) {
+			
 
 			EnqueteNoticia enqueteNoticia = new EnqueteNoticiaImpl();
 			enqueteNoticia.setArticleId(Long.parseLong(articleId));
@@ -39,8 +42,9 @@ public class EnqueteNoticiaPortlet extends MVCPortlet {
 					.increment(EnqueteNoticia.class.getName()));
 			EnqueteNoticiaLocalServiceUtil.addEnqueteNoticia(enqueteNoticia);
 
-			sendRedirect(request, response);
 		}
+		sendRedirect(request, response);
+
 
 	}
 
@@ -50,7 +54,13 @@ public class EnqueteNoticiaPortlet extends MVCPortlet {
 
 		String questionId = request.getParameter("questionId");
 		String[] articleIds = request.getParameterValues("articleId");
+		
+		if (articleIds.length == 0 || articleIds == null){
+			SessionErrors.add(request, "nenhum-artigo-selecionado");
+			sendRedirect(request, response);
 
+		}
+		
 		for (String articleId : articleIds) {
 
 			EnqueteNoticia enqueteNoticia = EnqueteNoticiaUtil
@@ -58,9 +68,8 @@ public class EnqueteNoticiaPortlet extends MVCPortlet {
 							Long.parseLong(articleId));
 			EnqueteNoticiaLocalServiceUtil.deleteEnqueteNoticia(enqueteNoticia);
 
-			sendRedirect(request, response);
-
 		}
+		sendRedirect(request, response);
 
 	}
 
