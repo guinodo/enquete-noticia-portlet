@@ -1,6 +1,5 @@
 <aui:input name="questionId" type="hidden" value="<%= questionId %>"></aui:input>
-<aui:input name="redirect" type="hidden"
-	value="<%= PortalUtil.getCurrentURL(renderRequest) %>"></aui:input>
+<aui:input name="redirect" type="hidden" value="<%= PortalUtil.getCurrentURL(renderRequest) %>"></aui:input>
 
 <h2>
 	<liferay-ui:message key="noticias-ja-associadas"></liferay-ui:message>
