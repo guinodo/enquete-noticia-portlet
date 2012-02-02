@@ -1,6 +1,6 @@
 <liferay-ui:error key="nenhum-artigo-selecionado" message="nenhum-artigo-selecionado" />
 
-<aui:form method='POST' action="<%= submitURL %>">
+<aui:form name="fm1" method='POST' action="<%= submitURL %>">
 	<h2><liferay-ui:message key="noticias-disponiveis" /></h2>
 	
 	<liferay-ui:search-container

@@ -62,13 +62,11 @@ public class EnqueteNoticiaLocalServiceImpl extends
 
 	public List<JournalArticle> getNoticiasAssociadas(long questionId,
 			int start, int end) throws SystemException, PortalException {
-		List<EnqueteNoticia> enquetesAssociadas = EnqueteNoticiaUtil
-				.findByQuestionID(questionId, start, end);
+		List<EnqueteNoticia> enquetesAssociadas = EnqueteNoticiaUtil.findByQuestionID(questionId, start, end);
 		List<JournalArticle> listaArtigos = new ArrayList<JournalArticle>();
 		for (EnqueteNoticia enqueteNoticia : enquetesAssociadas) {
 			long articleId = enqueteNoticia.getArticleId();
-			JournalArticle article = JournalArticleLocalServiceUtil
-					.getArticle(articleId);
+			JournalArticle article = JournalArticleLocalServiceUtil.getArticle(articleId);
 			listaArtigos.add(article);
 
 		}
@@ -82,8 +80,7 @@ public class EnqueteNoticiaLocalServiceImpl extends
 
 	public List<JournalArticle> getNoticiasNaoAssociadas(long questionId,
 			int start, int end) throws SystemException, PortalException {
-		List<EnqueteNoticia> enquetesAssociadas = EnqueteNoticiaUtil
-				.findByQuestionID(questionId, start, end);
+		List<EnqueteNoticia> enquetesAssociadas = EnqueteNoticiaUtil.findByQuestionID(questionId, start, end);
 		List<Object> listaArtigosAssociados = new ArrayList<Object>();
 
 		for (EnqueteNoticia enqueteNoticia : enquetesAssociadas) {

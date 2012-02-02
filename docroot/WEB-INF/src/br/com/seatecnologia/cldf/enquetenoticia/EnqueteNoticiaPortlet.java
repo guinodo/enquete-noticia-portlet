@@ -33,7 +33,6 @@ public class EnqueteNoticiaPortlet extends MVCPortlet {
 		}
 
 		for (String articleId : articleIds) {
-			
 
 			EnqueteNoticia enqueteNoticia = new EnqueteNoticiaImpl();
 			enqueteNoticia.setArticleId(Long.parseLong(articleId));

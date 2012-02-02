@@ -1,11 +1,8 @@
-<%@ page
-	import="br.com.seatecnologia.cldf.enquetenoticia.service.EnqueteNoticiaLocalServiceUtil"%>
+<%@ page import="br.com.seatecnologia.cldf.enquetenoticia.service.EnqueteNoticiaLocalServiceUtil"%>
 <%@ page import="com.liferay.portal.util.PortalUtil"%>
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil"%>
-<%@ page
-	import="com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil"%>
-<%@ page
-	import="com.liferay.portlet.polls.service.PollsQuestionLocalServiceUtil"%>
+<%@ page import="com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil"%>
+<%@ page import="com.liferay.portlet.polls.service.PollsQuestionLocalServiceUtil"%>
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet"%>
 <%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui"%>
 <%@ taglib uri="http://liferay.com/tld/aui" prefix="aui"%>
@@ -31,6 +28,7 @@
 	}
 %>
 
+<%@ include file="/html/enquetenoticia/form_validator.jspf"%>
 
 <liferay-ui:tabs names="current,available" refresh="<%= false %>">
 
@@ -42,7 +40,7 @@
 			<liferay-ui:header backURL="<%= redirectURL %>"
 				localizeTitle="<%= false %>" title="<%= currentTitle %>" />
 
-			<aui:form method='POST' action="<%= removeURL %>">
+			<aui:form name="fm" method='POST' action="<%= removeURL %>">
 
 				<liferay-ui:error key="nenhum-artigo-selecionado"
 					message="nenhum-artigo-selecionado"></liferay-ui:error>
@@ -70,10 +68,3 @@
 		</div>
 	</liferay-ui:section>
 </liferay-ui:tabs>
-<aui:script>
-var handleClick = function(e) {
-validator.validate();
-if(!validator.hasErrors())
-A.io('<%= currentURL %>', cfg);
-}
-</aui:script>
