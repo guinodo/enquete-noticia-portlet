@@ -234,10 +234,9 @@ public interface EnqueteNoticiaLocalService extends PersistedModelLocalService {
 	/**
 	* NOTE FOR DEVELOPERS:
 	*
-	* Never reference this interface directly. Always use {@link
-	* br.com.seatecnologia
-	* .cldf.enquetenoticia.service.EnqueteNoticiaLocalServiceUtil} to access
-	* the enquete noticia local service.
+	* Never reference this interface directly. Always use
+	* {@link br.com.seatecnologia .cldf.enquetenoticia.service.EnqueteNoticiaLocalServiceUtil}
+	* to access the enquete noticia local service.
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> getNoticiasAssociadas(

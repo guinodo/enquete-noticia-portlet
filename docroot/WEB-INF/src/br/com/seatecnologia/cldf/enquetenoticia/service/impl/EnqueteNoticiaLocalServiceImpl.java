@@ -55,30 +55,34 @@ public class EnqueteNoticiaLocalServiceImpl extends
 	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this interface directly. Always use {@link
-	 * br.com.seatecnologia
-	 * .cldf.enquetenoticia.service.EnqueteNoticiaLocalServiceUtil} to access
-	 * the enquete noticia local service.
+	 * Never reference this interface directly. Always use
+	 * {@link br.com.seatecnologia .cldf.enquetenoticia.service.EnqueteNoticiaLocalServiceUtil}
+	 * to access the enquete noticia local service.
 	 */
 
-	public List<JournalArticle> getNoticiasAssociadas(long questionId, int start, int end) throws SystemException, PortalException {
-		List<EnqueteNoticia> enquetesAssociadas = EnqueteNoticiaUtil.findByQuestionID(questionId, start, end);
+	public List<JournalArticle> getNoticiasAssociadas(long questionId,
+			int start, int end) throws SystemException, PortalException {
+		List<EnqueteNoticia> enquetesAssociadas = EnqueteNoticiaUtil
+				.findByQuestionID(questionId, start, end);
 		List<JournalArticle> listaArtigos = new ArrayList<JournalArticle>();
 		for (EnqueteNoticia enqueteNoticia : enquetesAssociadas) {
 			long articleId = enqueteNoticia.getArticleId();
-			JournalArticle article = JournalArticleLocalServiceUtil.getArticle(articleId);
+			JournalArticle article = JournalArticleLocalServiceUtil
+					.getArticle(articleId);
 			listaArtigos.add(article);
 		}
 		return listaArtigos;
 
 	}
 
-	public int countByQuestionId(long questionId) throws SystemException{
+	public int countByQuestionId(long questionId) throws SystemException {
 		return EnqueteNoticiaUtil.countByQuestionID(questionId);
 	}
 
-	public List<JournalArticle> getNoticiasNaoAssociadas(long questionId, int start, int end) throws SystemException, PortalException {
-		List<EnqueteNoticia> enquetesAssociadas = EnqueteNoticiaUtil.findByQuestionID(questionId, start, end);
+	public List<JournalArticle> getNoticiasNaoAssociadas(long questionId,
+			int start, int end) throws SystemException, PortalException {
+		List<EnqueteNoticia> enquetesAssociadas = EnqueteNoticiaUtil
+				.findByQuestionID(questionId, start, end);
 		List<Object> listaArtigosAssociados = new ArrayList<Object>();
 
 		for (EnqueteNoticia enqueteNoticia : enquetesAssociadas) {
@@ -86,12 +90,15 @@ public class EnqueteNoticiaLocalServiceImpl extends
 			listaArtigosAssociados.add(articleId);
 		}
 
-		DynamicQuery query = DynamicQueryFactoryUtil.forClass(JournalArticle.class, PortalClassLoaderUtil.getClassLoader());
-		if ( ! listaArtigosAssociados.isEmpty()) {
-			query.add(RestrictionsFactoryUtil.not(PropertyFactoryUtil.forName("id").in(listaArtigosAssociados)));
+		DynamicQuery query = DynamicQueryFactoryUtil.forClass(
+				JournalArticle.class, PortalClassLoaderUtil.getClassLoader());
+		if (!listaArtigosAssociados.isEmpty()) {
+			query.add(RestrictionsFactoryUtil.not(PropertyFactoryUtil.forName(
+					"id").in(listaArtigosAssociados)));
 		}
 		@SuppressWarnings("unchecked")
-		List<JournalArticle> results = JournalArticleLocalServiceUtil.dynamicQuery(query, start, end);
+		List<JournalArticle> results = JournalArticleLocalServiceUtil
+				.dynamicQuery(query, start, end);
 
 		return results;
 

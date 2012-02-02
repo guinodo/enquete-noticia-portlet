@@ -251,10 +251,9 @@ public class EnqueteNoticiaLocalServiceWrapper
 	/**
 	* NOTE FOR DEVELOPERS:
 	*
-	* Never reference this interface directly. Always use {@link
-	* br.com.seatecnologia
-	* .cldf.enquetenoticia.service.EnqueteNoticiaLocalServiceUtil} to access
-	* the enquete noticia local service.
+	* Never reference this interface directly. Always use
+	* {@link br.com.seatecnologia .cldf.enquetenoticia.service.EnqueteNoticiaLocalServiceUtil}
+	* to access the enquete noticia local service.
 	*/
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> getNoticiasAssociadas(
 		long questionId, int start, int end)
