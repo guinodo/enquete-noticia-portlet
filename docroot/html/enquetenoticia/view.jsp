@@ -28,8 +28,6 @@
 	}
 %>
 
-<%@ include file="/html/enquetenoticia/form_validator.jspf"%>
-
 <liferay-ui:tabs names="current,available" refresh="<%= false %>">
 
 	<!-- Artigos Associados -->

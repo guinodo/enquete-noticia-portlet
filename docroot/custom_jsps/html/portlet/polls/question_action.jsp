@@ -32,6 +32,7 @@ PollsQuestion question = (PollsQuestion)row.getObject();
 		</liferay-portlet:renderURL>
 		<liferay-ui:icon
 			image="help"
+			message="associate"
 			url="<%= associationURL %>"
 		/>
 	</c:if>
