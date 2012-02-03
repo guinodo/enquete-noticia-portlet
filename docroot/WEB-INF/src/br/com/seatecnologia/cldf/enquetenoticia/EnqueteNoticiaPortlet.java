@@ -37,8 +37,7 @@ public class EnqueteNoticiaPortlet extends MVCPortlet {
 			EnqueteNoticia enqueteNoticia = new EnqueteNoticiaImpl();
 			enqueteNoticia.setArticleId(Long.parseLong(articleId));
 			enqueteNoticia.setQuestionId(Long.parseLong(questionId));
-			enqueteNoticia.setEnqueteNoticiaId(CounterLocalServiceUtil
-					.increment(EnqueteNoticia.class.getName()));
+			enqueteNoticia.setEnqueteNoticiaId(CounterLocalServiceUtil.increment(EnqueteNoticia.class.getName()));
 			EnqueteNoticiaLocalServiceUtil.addEnqueteNoticia(enqueteNoticia);
 
 		}
@@ -62,8 +61,7 @@ public class EnqueteNoticiaPortlet extends MVCPortlet {
 		
 		for (String articleId : articleIds) {
 
-			EnqueteNoticia enqueteNoticia = EnqueteNoticiaUtil
-					.findByEnqueteNoticiaID(Long.parseLong(questionId),
+			EnqueteNoticia enqueteNoticia = EnqueteNoticiaUtil.findByEnqueteNoticiaID(Long.parseLong(questionId),
 							Long.parseLong(articleId));
 			EnqueteNoticiaLocalServiceUtil.deleteEnqueteNoticia(enqueteNoticia);
 

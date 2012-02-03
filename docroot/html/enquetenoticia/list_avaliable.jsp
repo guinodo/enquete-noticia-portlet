@@ -16,6 +16,11 @@
 				cssClass="radio-check-search-poll-column"></liferay-ui:search-container-column-jsp>
 			<liferay-ui:search-container-column-text property="title" />
 			
+			<liferay-ui:search-container-column-jsp
+				path="/html/enquetenoticia/testlink_article.jsp">
+			</liferay-ui:search-container-column-jsp>
+			<liferay-ui:search-container-column-text property="title" />
+			
 			<aui:input name="questionId" type="hidden" value="<%= questionId %>"></aui:input>
 			<aui:input name="redirect" type="hidden" value="<%= currentURL %>"></aui:input>
 			
