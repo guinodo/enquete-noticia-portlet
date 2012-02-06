@@ -2,7 +2,7 @@
 <!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.0.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_0_0.dtd">
 <service-builder
 	package-path="br.com.seatecnologia.cldf.enquetenoticia">
-	<author>Wallacy, Adan, Eduardo</author>
+	<author>Wallacy</author>
 	<namespace>EnqueteNoticia</namespace>
 
 	<entity name="EnqueteNoticia" local-service="true" remote-service="false" table="EnqueteNoticia">
@@ -16,7 +16,6 @@
 			<finder-column name="questionId"></finder-column>
 			<finder-column name="articleId"></finder-column>
 		</finder>
-	</entity>
-
+	</entity>	
 
 </service-builder>

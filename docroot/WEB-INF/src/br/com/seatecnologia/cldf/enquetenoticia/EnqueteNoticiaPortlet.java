@@ -16,17 +16,17 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 
 /**
- * Portlet implementation class EnqueteNoticiaPortlet
+ * Portlet implementation class EnqueteNoticia
  */
 public class EnqueteNoticiaPortlet extends MVCPortlet {
 
-	public void associatePollArticle(ActionRequest request,
+	public void associateQuestionArticle(ActionRequest request,
 			ActionResponse response) throws SystemException, IOException {
 
 		String questionId = request.getParameter("questionId");
 		String[] articleIds = request.getParameterValues("articleId");
-		
-		if (articleIds.length == 0 || articleIds == null){
+
+		if (articleIds.length == 0 || articleIds == null) {
 			SessionErrors.add(request, "nenhum-artigo-selecionado");
 			sendRedirect(request, response);
 
@@ -43,22 +43,21 @@ public class EnqueteNoticiaPortlet extends MVCPortlet {
 		}
 		sendRedirect(request, response);
 
-
 	}
 
-	public void removeAssociatePollArticle(ActionRequest request,
+	public void removeAssociateQuestionArticle(ActionRequest request,
 			ActionResponse response) throws SystemException, IOException,
 			NoSuchEnqueteNoticiaException, NumberFormatException {
 
 		String questionId = request.getParameter("questionId");
 		String[] articleIds = request.getParameterValues("articleId");
-		
-		if (articleIds.length == 0 || articleIds == null){
+
+		if (articleIds.length == 0 || articleIds == null) {
 			SessionErrors.add(request, "nenhum-artigo-selecionado");
 			sendRedirect(request, response);
 
 		}
-		
+
 		for (String articleId : articleIds) {
 
 			EnqueteNoticia enqueteNoticia = EnqueteNoticiaUtil.findByEnqueteNoticiaID(Long.parseLong(questionId),
@@ -66,11 +65,9 @@ public class EnqueteNoticiaPortlet extends MVCPortlet {
 			EnqueteNoticiaLocalServiceUtil.deleteEnqueteNoticia(enqueteNoticia);
 
 		}
-		
+
 		sendRedirect(request, response);
-   
 
 	}
-		        
 
 }

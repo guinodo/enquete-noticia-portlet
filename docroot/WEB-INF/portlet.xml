@@ -8,8 +8,8 @@
 >
 	
 	<portlet>
-		<portlet-name>enquetenoticiaportlet</portlet-name>
-		<display-name>Associação Noticia Enquete</display-name>
+		<portlet-name>Enquete Noticia</portlet-name>
+		<display-name>Enquete Noticia</display-name>
 		<portlet-class>
 			br.com.seatecnologia.cldf.enquetenoticia.EnqueteNoticiaPortlet
 		</portlet-class>
@@ -29,8 +29,8 @@
 		</supports>
 		<resource-bundle>content/Language</resource-bundle>
 		<portlet-info>
-			<title>Associação Noticia Enquete</title>
-			<short-title>Noticia Enquete</short-title>
+			<title>Enquete Noticia</title>
+			<short-title>EnqueteNoticia</short-title>
 			<keywords></keywords>
 		</portlet-info>
 		<security-role-ref>

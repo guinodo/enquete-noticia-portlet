@@ -26,7 +26,7 @@ import java.io.Serializable;
 import java.lang.reflect.Proxy;
 
 /**
- * @author Wallacy, Adan, Eduardo
+ * @author Wallacy
  */
 public class EnqueteNoticiaClp extends BaseModelImpl<EnqueteNoticia>
 	implements EnqueteNoticia {

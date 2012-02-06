@@ -1,3 +1,4 @@
+<%@page import="br.com.seatecnologia.cldf.enquetenoticia.service.EnqueteNoticiaLocalServiceUtil"%>
 <%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 <%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %>
 
@@ -20,7 +21,7 @@
 			path="/html/enquetenoticia/selector_article.jsp"
 			cssClass="radio-check-search-poll-column"></liferay-ui:search-container-column-jsp>
 		<liferay-ui:search-container-column-text name="Title">
-				<a href="/noticia/-/asset_publisher/aUw1/content/<%= aJournalArticle.getUrlTitle() %>"><%= aJournalArticle.getTitle() %></a>
+				<a href="/noticia/-/asset_publisher/D8Fj/content/<%= aJournalArticle.getUrlTitle() %>"><%= aJournalArticle.getTitle() %></a>
 		</liferay-ui:search-container-column-text>
 	</liferay-ui:search-container-row>
 	<liferay-ui:search-iterator />

@@ -19,7 +19,7 @@ import com.liferay.portal.model.PersistedModel;
 /**
  * The extended model interface for the EnqueteNoticia service. Represents a row in the &quot;EnqueteNoticia&quot; database table, with each column mapped to a property of this class.
  *
- * @author Wallacy, Adan, Eduardo
+ * @author Wallacy
  * @see EnqueteNoticiaModel
  * @see br.com.seatecnologia.cldf.enquetenoticia.model.impl.EnqueteNoticiaImpl
  * @see br.com.seatecnologia.cldf.enquetenoticia.model.impl.EnqueteNoticiaModelImpl

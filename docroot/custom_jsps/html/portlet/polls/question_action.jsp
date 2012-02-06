@@ -23,9 +23,9 @@ PollsQuestion question = (PollsQuestion)row.getObject();
 %>
 
 <liferay-ui:icon-menu>
-
+	
 	<c:if test="<%= PollsQuestionPermission.contains(permissionChecker, question, ActionKeys.UPDATE) %>">
-		<liferay-portlet:renderURL portletName="enquetenoticiaportlet_WAR_enquetenoticiaportlet" var="associationURL">
+		<liferay-portlet:renderURL portletName="EnqueteNoticia_WAR_enquetenoticiaportlet" var="associationURL">
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="questionId" value="<%= String.valueOf(question.getQuestionId()) %>" />
 			<portlet:param name="questionTitle" value="<%= String.valueOf(question.getTitle(locale)) %>" />

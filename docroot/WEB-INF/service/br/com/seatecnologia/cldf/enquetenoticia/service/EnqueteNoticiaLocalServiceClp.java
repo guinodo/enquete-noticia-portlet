@@ -19,7 +19,7 @@ import com.liferay.portal.kernel.util.MethodHandler;
 import com.liferay.portal.kernel.util.MethodKey;
 
 /**
- * @author Wallacy, Adan, Eduardo
+ * @author Wallacy
  */
 public class EnqueteNoticiaLocalServiceClp implements EnqueteNoticiaLocalService {
 	public EnqueteNoticiaLocalServiceClp(ClassLoaderProxy classLoaderProxy) {

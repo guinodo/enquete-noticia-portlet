@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * This class is used by SOAP remote services.
  *
- * @author    Wallacy, Adan, Eduardo
+ * @author    Wallacy
  * @generated
  */
 public class EnqueteNoticiaSoap implements Serializable {

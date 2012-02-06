@@ -17,7 +17,7 @@ package br.com.seatecnologia.cldf.enquetenoticia;
 import com.liferay.portal.NoSuchModelException;
 
 /**
- * @author Wallacy, Adan, Eduardo
+ * @author Wallacy
  */
 public class NoSuchEnqueteNoticiaException extends NoSuchModelException {
 

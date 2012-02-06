@@ -28,7 +28,7 @@ import com.liferay.portal.service.PersistedModelLocalService;
  * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
  * </p>
  *
- * @author Wallacy, Adan, Eduardo
+ * @author Wallacy
  * @see EnqueteNoticiaLocalServiceUtil
  * @see br.com.seatecnologia.cldf.enquetenoticia.service.base.EnqueteNoticiaLocalServiceBaseImpl
  * @see br.com.seatecnologia.cldf.enquetenoticia.service.impl.EnqueteNoticiaLocalServiceImpl
@@ -234,9 +234,7 @@ public interface EnqueteNoticiaLocalService extends PersistedModelLocalService {
 	/**
 	* NOTE FOR DEVELOPERS:
 	*
-	* Never reference this interface directly. Always use
-	* {@link br.com.seatecnologia .cldf.enquetenoticia.service.EnqueteNoticiaLocalServiceUtil}
-	* to access the enquete noticia local service.
+	* Never reference this interface directly. Always use {@link br.com.seatecnologia.cldf.enquetenoticia.service.EnqueteNoticiaLocalServiceUtil} to access the enquete noticia local service.
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> getNoticiasAssociadas(

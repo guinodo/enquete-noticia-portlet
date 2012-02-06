@@ -19,7 +19,7 @@ package br.com.seatecnologia.cldf.enquetenoticia.model;
  * This class is a wrapper for {@link EnqueteNoticia}.
  * </p>
  *
- * @author    Wallacy, Adan, Eduardo
+ * @author    Wallacy
  * @see       EnqueteNoticia
  * @generated
  */

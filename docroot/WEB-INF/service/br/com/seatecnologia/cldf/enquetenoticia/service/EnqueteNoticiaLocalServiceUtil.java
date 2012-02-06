@@ -26,7 +26,7 @@ import com.liferay.portal.kernel.util.ReferenceRegistry;
  * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
  * </p>
  *
- * @author Wallacy, Adan, Eduardo
+ * @author Wallacy
  * @see EnqueteNoticiaLocalService
  * @see br.com.seatecnologia.cldf.enquetenoticia.service.base.EnqueteNoticiaLocalServiceBaseImpl
  * @see br.com.seatecnologia.cldf.enquetenoticia.service.impl.EnqueteNoticiaLocalServiceImpl
@@ -259,9 +259,7 @@ public class EnqueteNoticiaLocalServiceUtil {
 	/**
 	* NOTE FOR DEVELOPERS:
 	*
-	* Never reference this interface directly. Always use
-	* {@link br.com.seatecnologia .cldf.enquetenoticia.service.EnqueteNoticiaLocalServiceUtil}
-	* to access the enquete noticia local service.
+	* Never reference this interface directly. Always use {@link br.com.seatecnologia.cldf.enquetenoticia.service.EnqueteNoticiaLocalServiceUtil} to access the enquete noticia local service.
 	*/
 	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> getNoticiasAssociadas(
 		long questionId, int start, int end)

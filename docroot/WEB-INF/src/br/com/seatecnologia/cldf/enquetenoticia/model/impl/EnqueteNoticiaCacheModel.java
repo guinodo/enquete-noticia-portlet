@@ -22,7 +22,7 @@ import com.liferay.portal.model.CacheModel;
 /**
  * The cache model class for representing EnqueteNoticia in entity cache.
  *
- * @author Wallacy, Adan, Eduardo
+ * @author Wallacy
  * @see EnqueteNoticia
  * @generated
  */
