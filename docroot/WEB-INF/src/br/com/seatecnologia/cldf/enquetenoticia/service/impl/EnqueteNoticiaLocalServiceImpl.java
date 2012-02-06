@@ -95,8 +95,7 @@ public class EnqueteNoticiaLocalServiceImpl extends
 					"id").in(listaArtigosAssociados)));
 		}
 		@SuppressWarnings("unchecked")
-		List<JournalArticle> results = JournalArticleLocalServiceUtil
-				.dynamicQuery(query, start, end);
+		List<JournalArticle> results = JournalArticleLocalServiceUtil.dynamicQuery(query, start, end);
 
 		return results;
 

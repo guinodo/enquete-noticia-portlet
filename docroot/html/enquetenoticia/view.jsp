@@ -1,13 +1,13 @@
-<%@ page import="br.com.seatecnologia.cldf.enquetenoticia.service.EnqueteNoticiaLocalServiceUtil"%>
-<%@ page import="com.liferay.portal.util.PortalUtil"%>
-<%@ page import="com.liferay.portal.kernel.util.ParamUtil"%>
-<%@ page import="com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil"%>
-<%@ page import="com.liferay.portlet.polls.service.PollsQuestionLocalServiceUtil"%>
-<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet"%>
-<%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui"%>
-<%@ taglib uri="http://liferay.com/tld/aui" prefix="aui"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@ page import="br.com.seatecnologia.cldf.enquetenoticia.service.EnqueteNoticiaLocalServiceUtil" %>
+<%@ page import="com.liferay.portal.util.PortalUtil" %>
+<%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
+<%@ page import="com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.polls.service.PollsQuestionLocalServiceUtil" %>
+<%@ page import="com.liferay.portal.model.Group" %>
+<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
+<%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
+<%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <portlet:defineObjects />
 
 <portlet:actionURL name='associatePollArticle' var='submitURL'></portlet:actionURL>
@@ -22,7 +22,7 @@
 
 	String redirectURL = renderRequest.getParameter("redirect");
 	String currentURL = PortalUtil.getCurrentURL(renderRequest);
-	
+
 	if (redirectURL == null) {
 		redirectURL = PortalUtil.getCurrentURL(renderRequest);
 	}
@@ -44,10 +44,10 @@
 					message="nenhum-artigo-selecionado"></liferay-ui:error>
 				<c:choose>
 					<c:when test="<%= questionId == 0 %>">
-						<%@ include file="/html/enquetenoticia/list_question.jsp"%>
+						<%@ include file="/html/enquetenoticia/list_question.jsp" %>
 					</c:when>
 					<c:otherwise>
-						<%@ include file="/html/enquetenoticia/list_current.jsp"%>
+						<%@ include file="/html/enquetenoticia/list_current.jsp" %>
 					</c:otherwise>
 				</c:choose>
 				<aui:button type="submit" value='remove'></aui:button>
@@ -62,7 +62,7 @@
 		<div id="journalArticle_search_container">
 			<liferay-ui:header backURL="<%= redirectURL %>"
 				title="<%= avaliableTitle %>" />
-			<%@ include file="/html/enquetenoticia/list_avaliable.jsp"%>
+			<%@ include file="/html/enquetenoticia/list_avaliable.jsp" %>
 		</div>
 	</liferay-ui:section>
 </liferay-ui:tabs>

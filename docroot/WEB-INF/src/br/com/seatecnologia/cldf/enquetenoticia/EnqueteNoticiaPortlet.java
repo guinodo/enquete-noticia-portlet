@@ -66,8 +66,11 @@ public class EnqueteNoticiaPortlet extends MVCPortlet {
 			EnqueteNoticiaLocalServiceUtil.deleteEnqueteNoticia(enqueteNoticia);
 
 		}
+		
 		sendRedirect(request, response);
+   
 
 	}
+		        
 
 }

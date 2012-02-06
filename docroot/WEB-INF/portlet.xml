@@ -17,10 +17,15 @@
 			<name>view-jsp</name>
 			<value>/html/enquetenoticia/view.jsp</value>
 		</init-param>
+		<init-param>
+			<name>edit-jsp</name>
+			<value>/html/enquetenoticia/edit.jsp</value>
+		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
 			<mime-type>text/html</mime-type>
 			<portlet-mode>view</portlet-mode>
+			<portlet-mode>edit</portlet-mode>
 		</supports>
 		<resource-bundle>content/Language</resource-bundle>
 		<portlet-info>
