@@ -250,4 +250,8 @@ public interface EnqueteNoticiaLocalService extends PersistedModelLocalService {
 		long questionId, int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<java.lang.String> getPaginasPortal()
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

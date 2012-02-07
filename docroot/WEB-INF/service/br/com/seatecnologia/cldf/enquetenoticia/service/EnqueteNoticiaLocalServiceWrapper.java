@@ -274,6 +274,11 @@ public class EnqueteNoticiaLocalServiceWrapper
 			start, end);
 	}
 
+	public java.util.List<java.lang.String> getPaginasPortal()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _enqueteNoticiaLocalService.getPaginasPortal();
+	}
+
 	public EnqueteNoticiaLocalService getWrappedEnqueteNoticiaLocalService() {
 		return _enqueteNoticiaLocalService;
 	}

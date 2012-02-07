@@ -25,11 +25,19 @@ import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
+import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutTypePortlet;
+import com.liferay.portal.model.Portlet;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.portlet.PortletRequest;
 
 /**
  * The implementation of the enquete noticia local service.
@@ -92,6 +100,42 @@ public class EnqueteNoticiaLocalServiceImpl
 
 		return results;
 
+	}
+	
+	
+	public List<String> getPaginasPortal() throws SystemException{
+		List<String> ListaPaginas = new ArrayList<String>();
+		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(0, LayoutLocalServiceUtil.getLayoutsCount());
+		
+		List<String> ignore = new ArrayList<String>();
+		ignore.add("/manage"); // Excluindo painel de controle da lista
+
+		for (Layout layout : layouts){
+				if(!ignore.contains(layout.getFriendlyURL())){
+//				LayoutTypePortlet layoutTypePortlet = (LayoutTypePortlet)layout.getLayoutType();
+//				List<Portlet> portlets = layoutTypePortlet.getPortlets();
+				if(layout.hasChildren()){
+					ListaPaginas.add("-" + layout.getName());
+					List<Layout> layoustsChildren = layout.getAllChildren();
+					for (Layout children : layoustsChildren){
+						if(!ignore.contains("--" + layout.getFriendlyURL())){
+							ListaPaginas.add(children.getName());
+							ignore.add(children.getFriendlyURL()); //As filhas aparecem como layouts separdos
+																	//e para não ser mapeado depois deve ser removida
+						}
+
+					}
+					ignore.add(layout.getFriendlyURL()); //Pode existir mais de um layout mapeado para a mesma url,
+														//então cada pagina adiconada é também removida para evitar reinserção na lista
+
+				}else{
+					ListaPaginas.add("-" + layout.getName());
+					ignore.add(layout.getFriendlyURL());
+				}
+
+			}
+		}
+		return ListaPaginas;
 	}
 
 }

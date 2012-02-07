@@ -93,6 +93,9 @@ public class EnqueteNoticiaLocalServiceClp implements EnqueteNoticiaLocalService
 
 		_getNoticiasNaoAssociadasMethodKey18 = new MethodKey(_classLoaderProxy.getClassName(),
 				"getNoticiasNaoAssociadas", long.class, int.class, int.class);
+
+		_getPaginasPortalMethodKey19 = new MethodKey(_classLoaderProxy.getClassName(),
+				"getPaginasPortal");
 	}
 
 	public br.com.seatecnologia.cldf.enquetenoticia.model.EnqueteNoticia addEnqueteNoticia(
@@ -625,6 +628,32 @@ public class EnqueteNoticiaLocalServiceClp implements EnqueteNoticiaLocalService
 		return (java.util.List<com.liferay.portlet.journal.model.JournalArticle>)ClpSerializer.translateOutput(returnObj);
 	}
 
+	public java.util.List<java.lang.String> getPaginasPortal()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		MethodHandler methodHandler = new MethodHandler(_getPaginasPortalMethodKey19);
+
+		try {
+			returnObj = _classLoaderProxy.invoke(methodHandler);
+		}
+		catch (Throwable t) {
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<java.lang.String>)ClpSerializer.translateOutput(returnObj);
+	}
+
 	public ClassLoaderProxy getClassLoaderProxy() {
 		return _classLoaderProxy;
 	}
@@ -649,4 +678,5 @@ public class EnqueteNoticiaLocalServiceClp implements EnqueteNoticiaLocalService
 	private MethodKey _getNoticiasAssociadasMethodKey16;
 	private MethodKey _countByQuestionIdMethodKey17;
 	private MethodKey _getNoticiasNaoAssociadasMethodKey18;
+	private MethodKey _getPaginasPortalMethodKey19;
 }
