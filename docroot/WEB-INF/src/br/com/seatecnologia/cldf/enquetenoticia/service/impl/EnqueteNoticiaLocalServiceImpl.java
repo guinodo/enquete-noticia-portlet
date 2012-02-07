@@ -118,8 +118,8 @@ public class EnqueteNoticiaLocalServiceImpl
 					ListaPaginas.add("-" + layout.getName());
 					List<Layout> layoustsChildren = layout.getAllChildren();
 					for (Layout children : layoustsChildren){
-						if(!ignore.contains("--" + layout.getFriendlyURL())){
-							ListaPaginas.add(children.getName());
+						if(!ignore.contains(layout.getFriendlyURL())){
+							ListaPaginas.add("--" + children.getName());
 							ignore.add(children.getFriendlyURL()); //As filhas aparecem como layouts separdos
 																	//e para não ser mapeado depois deve ser removida
 						}
