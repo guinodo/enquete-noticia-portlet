@@ -35,7 +35,9 @@ import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.portlet.PortletRequest;
 
@@ -103,8 +105,8 @@ public class EnqueteNoticiaLocalServiceImpl
 	}
 	
 	
-	public List<String> getPaginasPortal() throws SystemException{
-		List<String> ListaPaginas = new ArrayList<String>();
+	public Map<String,String> getPaginasPortal() throws SystemException{
+		Map<String,String> ListaPaginas = new HashMap<String,String>();
 		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(0, LayoutLocalServiceUtil.getLayoutsCount());
 		
 		List<String> ignore = new ArrayList<String>();
@@ -115,12 +117,11 @@ public class EnqueteNoticiaLocalServiceImpl
 //				LayoutTypePortlet layoutTypePortlet = (LayoutTypePortlet)layout.getLayoutType();
 //				List<Portlet> portlets = layoutTypePortlet.getPortlets();
 				if(layout.hasChildren()){
-					ListaPaginas.add("-" + layout.getName());
+					ListaPaginas.put("-" + layout.getName(), layout.getFriendlyURL());
 					List<Layout> layoustsChildren = layout.getAllChildren();
 					for (Layout children : layoustsChildren){
 						if(!ignore.contains(layout.getFriendlyURL())){
-							ListaPaginas.add("--" + children.getName());
-							ignore.add(children.getFriendlyURL()); //As filhas aparecem como layouts separdos
+							ListaPaginas.put("--" + children.getName(), children.getFriendlyURL());							ignore.add(children.getFriendlyURL()); //As filhas aparecem como layouts separdos
 																	//e para não ser mapeado depois deve ser removida
 						}
 
@@ -129,7 +130,7 @@ public class EnqueteNoticiaLocalServiceImpl
 														//então cada pagina adiconada é também removida para evitar reinserção na lista
 
 				}else{
-					ListaPaginas.add("-" + layout.getName());
+					ListaPaginas.put("-" + layout.getName(), layout.getFriendlyURL());
 					ignore.add(layout.getFriendlyURL());
 				}
 

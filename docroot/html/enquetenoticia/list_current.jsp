@@ -17,9 +17,9 @@
 	<liferay-ui:search-container-row
 		className="com.liferay.portlet.journal.model.JournalArticle"
 		modelVar="aJournalArticle" keyProperty="articleId">
-		<liferay-ui:search-container-column-jsp
-			path="/html/enquetenoticia/selector_article.jsp"
-			cssClass="radio-check-search-poll-column"></liferay-ui:search-container-column-jsp>
+		<liferay-ui:search-container-column-text cssClass="radio-check-search-poll-column">
+				<input type="checkbox" name="<portlet:namespace/>articleId" value="<%= aJournalArticle.getPrimaryKey() %>"></input>
+		</liferay-ui:search-container-column-text>
 		<liferay-ui:search-container-column-text name="Title">
 				<a href="/noticia/-/asset_publisher/D8Fj/content/<%= aJournalArticle.getUrlTitle() %>"><%= aJournalArticle.getTitle() %></a>
 		</liferay-ui:search-container-column-text>

@@ -628,7 +628,7 @@ public class EnqueteNoticiaLocalServiceClp implements EnqueteNoticiaLocalService
 		return (java.util.List<com.liferay.portlet.journal.model.JournalArticle>)ClpSerializer.translateOutput(returnObj);
 	}
 
-	public java.util.List<java.lang.String> getPaginasPortal()
+	public java.util.Map<java.lang.String, java.lang.String> getPaginasPortal()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
@@ -651,7 +651,7 @@ public class EnqueteNoticiaLocalServiceClp implements EnqueteNoticiaLocalService
 			}
 		}
 
-		return (java.util.List<java.lang.String>)ClpSerializer.translateOutput(returnObj);
+		return (java.util.Map<java.lang.String, java.lang.String>)ClpSerializer.translateOutput(returnObj);
 	}
 
 	public ClassLoaderProxy getClassLoaderProxy() {
