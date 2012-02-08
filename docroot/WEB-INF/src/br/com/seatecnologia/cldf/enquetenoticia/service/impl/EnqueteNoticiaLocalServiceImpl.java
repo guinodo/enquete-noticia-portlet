@@ -25,21 +25,15 @@ import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
-import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Layout;
-import com.liferay.portal.model.LayoutTypePortlet;
-import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
-import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.portlet.PortletRequest;
 
 /**
  * The implementation of the enquete noticia local service.
@@ -62,6 +56,8 @@ public class EnqueteNoticiaLocalServiceImpl
 	 *
 	 * Never reference this interface directly. Always use {@link br.com.seatecnologia.cldf.enquetenoticia.service.EnqueteNoticiaLocalServiceUtil} to access the enquete noticia local service.
 	 */
+	
+
 
 	public List<JournalArticle> getNoticiasAssociadas(long questionId,
 			int start, int end) throws SystemException, PortalException {
@@ -105,38 +101,39 @@ public class EnqueteNoticiaLocalServiceImpl
 	}
 	
 	
-	public Map<String,String> getPaginasPortal() throws SystemException{
-		Map<String,String> ListaPaginas = new HashMap<String,String>();
+	public Map<String,Layout> getPaginasPortal() throws SystemException{		
+		Map<String,Layout> ListaPaginas = new LinkedHashMap<String,Layout>();
 		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(0, LayoutLocalServiceUtil.getLayoutsCount());
-		
 		List<String> ignore = new ArrayList<String>();
 		ignore.add("/manage"); // Excluindo painel de controle da lista
-
-		for (Layout layout : layouts){
-				if(!ignore.contains(layout.getFriendlyURL())){
-//				LayoutTypePortlet layoutTypePortlet = (LayoutTypePortlet)layout.getLayoutType();
-//				List<Portlet> portlets = layoutTypePortlet.getPortlets();
-				if(layout.hasChildren()){
-					ListaPaginas.put("-" + layout.getName(), layout.getFriendlyURL());
-					List<Layout> layoustsChildren = layout.getAllChildren();
-					for (Layout children : layoustsChildren){
-						if(!ignore.contains(layout.getFriendlyURL())){
-							ListaPaginas.put("--" + children.getName(), children.getFriendlyURL());							ignore.add(children.getFriendlyURL()); //As filhas aparecem como layouts separdos
-																	//e para não ser mapeado depois deve ser removida
-						}
-
-					}
-					ignore.add(layout.getFriendlyURL()); //Pode existir mais de um layout mapeado para a mesma url,
-														//então cada pagina adiconada é também removida para evitar reinserção na lista
-
-				}else{
-					ListaPaginas.put("-" + layout.getName(), layout.getFriendlyURL());
-					ignore.add(layout.getFriendlyURL());
-				}
-
-			}
-		}
+		String prefixo = "-";
+		montaPaginasPortal(layouts,ListaPaginas,ignore,prefixo);
+		
 		return ListaPaginas;
 	}
+	
+	private void montaPaginasPortal(List<Layout> layouts,Map<String,Layout> ListaPaginas, List<String> ignore,String prefixo) throws SystemException{
+		
+		for (Layout layout : layouts){
+			if(!ignore.contains(layout.getFriendlyURL())){
+	//			LayoutTypePortlet layoutTypePortlet = (LayoutTypePortlet)layout.getLayoutType();
+	//			List<Portlet> portlets = layoutTypePortlet.getPortlets();
+	//			System.out.println(portlets);
+				if(!layout.hasChildren()){	
+					ListaPaginas.put(prefixo + layout.getName("en_US"), layout);
+					ignore.add(layout.getFriendlyURL());//Pode existir mais de um layout mapeado para a mesma url,
+														//então cada pagina adiconada é também removida para evitar reinserção na lista
+				}else{
+					List<Layout> children = layout.getAllChildren();
+					ListaPaginas.put(prefixo + layout.getName("en_US"), layout);					
+					montaPaginasPortal(children,ListaPaginas,ignore,prefixo + "-");
+					ignore.add(layout.getFriendlyURL()); 
+				}
+			}
+		}
+	}
+	
+			
+	
 
 }

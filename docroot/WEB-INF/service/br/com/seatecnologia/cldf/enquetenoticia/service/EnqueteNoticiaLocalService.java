@@ -252,6 +252,6 @@ public interface EnqueteNoticiaLocalService extends PersistedModelLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.Map<java.lang.String, java.lang.String> getPaginasPortal()
+	public java.util.Map<java.lang.String, com.liferay.portal.model.Layout> getPaginasPortal()
 		throws com.liferay.portal.kernel.exception.SystemException;
 }

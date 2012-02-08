@@ -280,7 +280,7 @@ public class EnqueteNoticiaLocalServiceUtil {
 		return getService().getNoticiasNaoAssociadas(questionId, start, end);
 	}
 
-	public static java.util.Map<java.lang.String, java.lang.String> getPaginasPortal()
+	public static java.util.Map<java.lang.String, com.liferay.portal.model.Layout> getPaginasPortal()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getPaginasPortal();
 	}
