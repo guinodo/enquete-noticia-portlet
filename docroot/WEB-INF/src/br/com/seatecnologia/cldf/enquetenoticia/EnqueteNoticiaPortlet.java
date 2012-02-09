@@ -14,6 +14,8 @@ import java.io.IOException;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
+import javax.portlet.PortletException;
+import javax.portlet.PortletPreferences;
 
 /**
  * Portlet implementation class EnqueteNoticia
@@ -68,6 +70,17 @@ public class EnqueteNoticiaPortlet extends MVCPortlet {
 
 		sendRedirect(request, response);
 
+	}
+	
+	public void salvarPreferencias(ActionRequest actionRequest, ActionResponse actionResponse) throws IOException, PortletException{
+		
+		String viewPreferences = actionRequest.getParameter("viewPreferences");
+		
+		
+		PortletPreferences preferences = actionRequest.getPreferences();
+		preferences.setValue("viewPreferences", viewPreferences);
+	
+		preferences.store();
 	}
 
 }

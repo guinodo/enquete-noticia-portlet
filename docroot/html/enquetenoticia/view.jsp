@@ -1,3 +1,5 @@
+<%@page import="javax.portlet.PortletPreferences"%>
+<%@page import="com.liferay.portal.service.LayoutLocalServiceUtil"%>
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
 <%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %>
@@ -19,11 +21,16 @@
 
 	String redirectURL = renderRequest.getParameter("redirect");
 	String currentURL = PortalUtil.getCurrentURL(renderRequest);
+	 
 
 	if (redirectURL == null) {
 		redirectURL = PortalUtil.getCurrentURL(renderRequest);
 	}
+
+	if(PortalUtil.getCurrentURL(renderRequest).contains("/manage") )
+	{
 %>
+
 
 <liferay-ui:tabs names="current,available" refresh="<%= false %>">
 
@@ -63,3 +70,18 @@
 		</div>
 	</liferay-ui:section>
 </liferay-ui:tabs>
+
+<%
+
+}else{
+		
+	PortletPreferences preferences = renderRequest.getPreferences();
+	if(preferences.getValue("viewPreferences", "enqueteView").equals("noticiaView")){
+		out.println("Lista de Noticias");
+	}else{
+		out.println("Lista de Enquetes");
+	}
+	
+
+}
+%>

@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
@@ -34,6 +35,9 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.portlet.ActionRequest;
+import javax.portlet.PortletPreferences;
 
 /**
  * The implementation of the enquete noticia local service.
@@ -116,9 +120,6 @@ public class EnqueteNoticiaLocalServiceImpl
 		
 		for (Layout layout : layouts){
 			if(!ignore.contains(layout.getFriendlyURL())){
-	//			LayoutTypePortlet layoutTypePortlet = (LayoutTypePortlet)layout.getLayoutType();
-	//			List<Portlet> portlets = layoutTypePortlet.getPortlets();
-	//			System.out.println(portlets);
 				if(!layout.hasChildren()){	
 					ListaPaginas.put(prefixo + layout.getName("en_US"), layout);
 					ignore.add(layout.getFriendlyURL());//Pode existir mais de um layout mapeado para a mesma url,
