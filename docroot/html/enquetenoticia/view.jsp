@@ -21,7 +21,16 @@
 
 	String redirectURL = renderRequest.getParameter("redirect");
 	String currentURL = PortalUtil.getCurrentURL(renderRequest);
-	 
+	
+	PortletPreferences preferences = renderRequest.getPreferences();
+	//String noticiaURL = preferences.getValue("paginaPreference", "/noticia");
+	String noticiaURL = "/noticia";
+	String portletURL = preferences.getValue("portletPreference", "abcd");
+	String viewPreference = preferences.getValue("viewPreference", "enqueteView");
+	
+	System.out.println("View nU:" + noticiaURL);
+	System.out.println("View pU:" + portletURL);
+	System.out.println("View vP:" + viewPreference);
 
 	if (redirectURL == null) {
 		redirectURL = PortalUtil.getCurrentURL(renderRequest);
@@ -75,13 +84,10 @@
 
 }else{
 		
-	PortletPreferences preferences = renderRequest.getPreferences();
-	if(preferences.getValue("viewPreferences", "enqueteView").equals("noticiaView")){
+	if(viewPreference.equals("noticiaView")){
 		out.println("Lista de Noticias");
 	}else{
 		out.println("Lista de Enquetes");
 	}
-	
-
 }
 %>

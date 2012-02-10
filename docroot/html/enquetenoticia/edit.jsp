@@ -1,3 +1,4 @@
+<%@page import="java.util.Properties"%>
 <%@page import="java.util.List"%>
 <%@page import="com.liferay.portal.model.Portlet"%>
 <%@page import="com.liferay.portal.model.LayoutTypePortlet"%>
@@ -18,14 +19,14 @@
 <form name="fm" method="POST" action="<%=submitURL%>">
 
 <%
-	Map<String, Layout> paginasPortal = EnqueteNoticiaLocalServiceUtil.getPaginasPortal();
+	Map<Properties, List<Portlet>> paginasPortal = EnqueteNoticiaLocalServiceUtil.getPaginasPortal();
 
 	if (!PortalUtil.getCurrentURL(renderRequest).contains("/manage")) {
 %>
 
-	<aui:input type="radio" name="viewPreferences" value="enqueteView"
+	<aui:input type="radio" name="viewPreference" value="enqueteView"
 		label="exibir-enquetes-e-suas-associacoes"></aui:input>
-	<aui:input type="radio" name="viewPreferences" value="noticiaView"
+	<aui:input type="radio" name="viewPreference" value="noticiaView"
 		label="exibir-noticias-e-suas-associacoes"></aui:input>
 
 	
@@ -34,39 +35,38 @@
 %>
 
 <portlet:renderURL var="url" />
-<aui:select id="pagina" name="pagina"
+<aui:select id="paginaPreference" name="paginaPreference"
 	onChange='<%= renderResponse.getNamespace() + "proximoPasso()"%>'>
 
 	<%
-		for (Map.Entry<String, Layout> pagina : paginasPortal.entrySet()) {
+		for (Map.Entry<Properties, List<Portlet>> pagina : paginasPortal.entrySet()) {
 	%>
-	<aui:option label="<%=pagina.getKey() %>" value="<%=pagina.getKey() %>" />
+	<aui:option label='<%=pagina.getKey().getProperty("pagina") %>' value="<%=pagina.getKey() %>" />
 	<%
 		}
 	%>
 </aui:select>
 
 <%
-	System.out.println("Pagina: " + renderRequest.getParameter("pagina"));
+	System.out.println("Pagina: " + renderRequest.getParameter("paginaPreference"));
 
-	if (renderRequest.getParameter("pagina") != null) {
+	if (renderRequest.getParameter("paginaPreference") != null) {
 %>
-<aui:select id="portlet" name="portlet" onChange='<%= renderResponse.getNamespace() + "passoFinal()"%>'>
+<aui:select id="portletPreference" name="portletPreference" onChange='<%= renderResponse.getNamespace() + "passoFinal()"%>'>
 
 	<%
-		Layout layout = paginasPortal.get(renderRequest.getParameter("pagina"));
-		LayoutTypePortlet layoutTypePortlet = (LayoutTypePortlet) layout.getLayoutType();
-		List<Portlet> portlets = layoutTypePortlet.getPortlets();
+		
+		List<Portlet> portlets = paginasPortal.get(renderRequest.getParameter("paginaPreference"));
 		for (Portlet portlet : portlets) {
 	%>
-		<aui:option label="<%=portlet.getDisplayName() %>" value="<%=portlet.getActionURLRedirect() %>" />
+		<aui:option label="<%=portlet.getDisplayName() %>" value="<%=portlet.getInstanceId() %>" />
 	<%
 		}
 	%>
 </aui:select>
 
 <%
-	System.out.println("Portlet: " + renderRequest.getParameter("portlet"));
+	System.out.println("Portlet: " + renderRequest.getParameter("portletPreferences"));
 
 	}
 %>
@@ -76,15 +76,15 @@
 
 <aui:script>
 function <portlet:namespace />proximoPasso() {
-	var select = document.getElementById('<portlet:namespace />pagina');
+	var select = document.getElementById('<portlet:namespace />paginaPreference');
 	var value = select.value;
-	var url = "<%=url%>" + "&<portlet:namespace />pagina="+value;
+	var url = "<%=url%>" + "&<portlet:namespace />paginaPreference="+value;
 	window.location.href = url;
 }
 function <portlet:namespace />passoFinal() {
-	var select = document.getElementById('<portlet:namespace />portlet');
+	var select = document.getElementById('<portlet:namespace />portletPreferences');
 	var value = select.value;
-	var url = "<%=url%>" + "&<portlet:namespace />portlet="+value;
+	var url = "<%=url%>" + "&<portlet:namespace />portletPreferences="+value;
 	window.location.href = url;
 }
 

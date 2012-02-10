@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
@@ -35,6 +36,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.PortletPreferences;
@@ -105,8 +107,8 @@ public class EnqueteNoticiaLocalServiceImpl
 	}
 	
 	
-	public Map<String,Layout> getPaginasPortal() throws SystemException{		
-		Map<String,Layout> ListaPaginas = new LinkedHashMap<String,Layout>();
+	public Map<Properties,List<Portlet>> getPaginasPortal() throws SystemException{		
+		Map<Properties,List<Portlet>> ListaPaginas = new LinkedHashMap<Properties,List<Portlet>>();
 		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(0, LayoutLocalServiceUtil.getLayoutsCount());
 		List<String> ignore = new ArrayList<String>();
 		ignore.add("/manage"); // Excluindo painel de controle da lista
@@ -116,17 +118,31 @@ public class EnqueteNoticiaLocalServiceImpl
 		return ListaPaginas;
 	}
 	
-	private void montaPaginasPortal(List<Layout> layouts,Map<String,Layout> ListaPaginas, List<String> ignore,String prefixo) throws SystemException{
+	private void montaPaginasPortal(List<Layout> layouts,Map<Properties,List<Portlet>> ListaPaginas, List<String> ignore,String prefixo) throws SystemException{
+		
+		Properties paginaProp = new Properties();
+		LayoutTypePortlet layoutTypePortlet;
+		List<Portlet> portlets;
+		
 		
 		for (Layout layout : layouts){
 			if(!ignore.contains(layout.getFriendlyURL())){
-				if(!layout.hasChildren()){	
-					ListaPaginas.put(prefixo + layout.getName("en_US"), layout);
+				if(!layout.hasChildren()){
+					paginaProp.setProperty("pagina", prefixo + layout.getName("en_US"));
+					paginaProp.setProperty("paginaURL", layout.getFriendlyURL());
+					layoutTypePortlet = (LayoutTypePortlet) layout.getLayoutType();
+					portlets = layoutTypePortlet.getPortlets();
+					ListaPaginas.put(paginaProp,portlets);
 					ignore.add(layout.getFriendlyURL());//Pode existir mais de um layout mapeado para a mesma url,
 														//então cada pagina adiconada é também removida para evitar reinserção na lista
 				}else{
 					List<Layout> children = layout.getAllChildren();
-					ListaPaginas.put(prefixo + layout.getName("en_US"), layout);					
+					
+					paginaProp.setProperty("pagina", prefixo + layout.getName("en_US"));
+					paginaProp.setProperty("paginaURL", layout.getFriendlyURL());
+					layoutTypePortlet = (LayoutTypePortlet) layout.getLayoutType();
+					portlets = layoutTypePortlet.getPortlets();
+					ListaPaginas.put(paginaProp,portlets);
 					montaPaginasPortal(children,ListaPaginas,ignore,prefixo + "-");
 					ignore.add(layout.getFriendlyURL()); 
 				}

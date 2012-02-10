@@ -74,12 +74,20 @@ public class EnqueteNoticiaPortlet extends MVCPortlet {
 	
 	public void salvarPreferencias(ActionRequest actionRequest, ActionResponse actionResponse) throws IOException, PortletException{
 		
-		String viewPreferences = actionRequest.getParameter("viewPreferences");
-		
+		String viewPreference = actionRequest.getParameter("viewPreference");
+		String paginaPreference = actionRequest.getParameter("paginaPreference");
+		String portletPreference = actionRequest.getParameter("portletPreference");
+		System.out.println("Action vP: " + viewPreference);
+		System.out.println("Action pP: " + paginaPreference);
+		System.out.println("Action ptP: " + portletPreference);
 		
 		PortletPreferences preferences = actionRequest.getPreferences();
-		preferences.setValue("viewPreferences", viewPreferences);
-	
+		if(viewPreference != null)
+			preferences.setValue("viewPreference", viewPreference);
+		if(paginaPreference != null)
+			preferences.setValue("paginaPreference", paginaPreference);
+		if(portletPreference != null)
+			preferences.setValue("portletPreference", portletPreference);			
 		preferences.store();
 	}
 
