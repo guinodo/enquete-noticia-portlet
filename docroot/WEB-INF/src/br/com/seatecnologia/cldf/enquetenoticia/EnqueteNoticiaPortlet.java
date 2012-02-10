@@ -11,6 +11,8 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 import java.io.IOException;
+import java.io.StringReader;
+import java.util.Properties;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -77,9 +79,10 @@ public class EnqueteNoticiaPortlet extends MVCPortlet {
 		String viewPreference = actionRequest.getParameter("viewPreference");
 		String paginaPreference = actionRequest.getParameter("paginaPreference");
 		String portletPreference = actionRequest.getParameter("portletPreference");
-		System.out.println("Action vP: " + viewPreference);
-		System.out.println("Action pP: " + paginaPreference);
-		System.out.println("Action ptP: " + portletPreference);
+		
+		Properties paginaProp = new Properties(); 
+		paginaProp.load(new StringReader(paginaPreference.substring(1, paginaPreference.length() - 1).replace(", ", "\n")));
+		paginaPreference = paginaProp.getProperty("paginaURL");
 		
 		PortletPreferences preferences = actionRequest.getPreferences();
 		if(viewPreference != null)

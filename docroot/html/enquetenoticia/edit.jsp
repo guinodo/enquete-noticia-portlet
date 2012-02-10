@@ -1,3 +1,6 @@
+<%@page import="java.io.StringReader"%>
+<%@page import="com.liferay.portal.kernel.util.PropertiesUtil"%>
+<%@page import="java.util.LinkedHashMap"%>
 <%@page import="java.util.Properties"%>
 <%@page import="java.util.List"%>
 <%@page import="com.liferay.portal.model.Portlet"%>
@@ -20,7 +23,7 @@
 
 <%
 	Map<Properties, List<Portlet>> paginasPortal = EnqueteNoticiaLocalServiceUtil.getPaginasPortal();
-
+	
 	if (!PortalUtil.getCurrentURL(renderRequest).contains("/manage")) {
 %>
 
@@ -35,8 +38,7 @@
 %>
 
 <portlet:renderURL var="url" />
-<aui:select id="paginaPreference" name="paginaPreference"
-	onChange='<%= renderResponse.getNamespace() + "proximoPasso()"%>'>
+<aui:select id="paginaPreference" name="paginaPreference" onChange='<%= renderResponse.getNamespace() + "proximoPasso()"%>'>
 
 	<%
 		for (Map.Entry<Properties, List<Portlet>> pagina : paginasPortal.entrySet()) {
@@ -48,15 +50,17 @@
 </aui:select>
 
 <%
-	System.out.println("Pagina: " + renderRequest.getParameter("paginaPreference"));
+	String requestPagina = renderRequest.getParameter("paginaPreference");
 
-	if (renderRequest.getParameter("paginaPreference") != null) {
+	if (requestPagina != null) {
 %>
 <aui:select id="portletPreference" name="portletPreference" onChange='<%= renderResponse.getNamespace() + "passoFinal()"%>'>
 
 	<%
-		
-		List<Portlet> portlets = paginasPortal.get(renderRequest.getParameter("paginaPreference"));
+		Properties paginaProp = new Properties(); 
+		paginaProp.load(new StringReader(requestPagina.substring(1, requestPagina.length() - 1).replace(", ", "\n")));
+		List<Portlet> portlets = paginasPortal.get(paginaProp);
+		System.out.println("Portlets:" + portlets);
 		for (Portlet portlet : portlets) {
 	%>
 		<aui:option label="<%=portlet.getDisplayName() %>" value="<%=portlet.getInstanceId() %>" />

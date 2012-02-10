@@ -37,10 +37,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
-
-import javax.portlet.ActionRequest;
-import javax.portlet.PortletPreferences;
-
 /**
  * The implementation of the enquete noticia local service.
  *
@@ -120,7 +116,6 @@ public class EnqueteNoticiaLocalServiceImpl
 	
 	private void montaPaginasPortal(List<Layout> layouts,Map<Properties,List<Portlet>> ListaPaginas, List<String> ignore,String prefixo) throws SystemException{
 		
-		Properties paginaProp = new Properties();
 		LayoutTypePortlet layoutTypePortlet;
 		List<Portlet> portlets;
 		
@@ -128,6 +123,7 @@ public class EnqueteNoticiaLocalServiceImpl
 		for (Layout layout : layouts){
 			if(!ignore.contains(layout.getFriendlyURL())){
 				if(!layout.hasChildren()){
+					Properties paginaProp = new Properties();
 					paginaProp.setProperty("pagina", prefixo + layout.getName("en_US"));
 					paginaProp.setProperty("paginaURL", layout.getFriendlyURL());
 					layoutTypePortlet = (LayoutTypePortlet) layout.getLayoutType();
@@ -137,7 +133,7 @@ public class EnqueteNoticiaLocalServiceImpl
 														//então cada pagina adiconada é também removida para evitar reinserção na lista
 				}else{
 					List<Layout> children = layout.getAllChildren();
-					
+					Properties paginaProp = new Properties();
 					paginaProp.setProperty("pagina", prefixo + layout.getName("en_US"));
 					paginaProp.setProperty("paginaURL", layout.getFriendlyURL());
 					layoutTypePortlet = (LayoutTypePortlet) layout.getLayoutType();
