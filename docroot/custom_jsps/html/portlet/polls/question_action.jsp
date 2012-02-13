@@ -15,6 +15,7 @@
 --%>
 
 <%@ include file="/html/portlet/polls/init.jsp" %>
+<%@page import="br.com.seatecnologia.cldf.enquetenoticia.service.EnqueteNoticiaLocalServiceUtil"%>
 
 <%
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
