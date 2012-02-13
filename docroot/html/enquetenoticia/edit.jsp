@@ -23,7 +23,7 @@
 
 <%
 	Map<Properties, List<Portlet>> paginasPortal = EnqueteNoticiaLocalServiceUtil.getPaginasPortal();
-	
+
 	if (!PortalUtil.getCurrentURL(renderRequest).contains("/manage")) {
 %>
 
@@ -70,8 +70,6 @@
 </aui:select>
 
 <%
-	System.out.println("Portlet: " + renderRequest.getParameter("portletPreferences"));
-
 	}
 %>
 <aui:button type="submit"></aui:button>

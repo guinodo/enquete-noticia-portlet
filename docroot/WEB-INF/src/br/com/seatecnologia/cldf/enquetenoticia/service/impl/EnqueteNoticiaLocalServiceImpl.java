@@ -146,7 +146,10 @@ public class EnqueteNoticiaLocalServiceImpl
 		}
 	}
 	
-			
+	public String getUrlBase(){
+		
+		return null;
+	}
 	
 
 }
