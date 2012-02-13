@@ -21,7 +21,7 @@
 				<input type="checkbox" name="<portlet:namespace/>articleId" value="<%= aJournalArticle.getPrimaryKey() %>"></input>
 		</liferay-ui:search-container-column-text>
 		<liferay-ui:search-container-column-text name="Title">
-				<a href="/noticia/-/asset_publisher/D8Fj/content/<%= aJournalArticle.getUrlTitle() %>"><%= aJournalArticle.getTitle() %></a>
+			<a href="<%= noticiaURL %>/-/asset_publisher/<%= portletURL %>/content/<%= aJournalArticle.getUrlTitle() %>"><%= aJournalArticle.getTitle() %></a>
 		</liferay-ui:search-container-column-text>
 	</liferay-ui:search-container-row>
 	<liferay-ui:search-iterator />
