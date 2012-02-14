@@ -1,3 +1,4 @@
+<%@page import="com.liferay.util.portlet.PortletProps"%>
 <%@page import="javax.portlet.PortletPreferences"%>
 <%@page import="com.liferay.portal.service.LayoutLocalServiceUtil"%>
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
@@ -13,6 +14,9 @@
 
 
 <%
+	System.out.println("Properties: " + PortletProps.getProperties());	
+	System.out.println("Teste Pagina Preferece:  " + PortletProps.get("paginaPreference"));
+
 	long questionId = ParamUtil.getLong(request, "questionId");
 	String questionTitle = ParamUtil.getString(request, "questionTitle");
 

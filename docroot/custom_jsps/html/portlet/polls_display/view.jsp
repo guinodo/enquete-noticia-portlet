@@ -14,9 +14,13 @@
  */
 --%>
 
+<%@page import="br.com.seatecnologia.cldf.enquetenoticia.service.EnqueteNoticiaLocalServiceUtil"%>
 <%@ include file="/html/portlet/polls_display/init.jsp" %>
 
 <%
+
+System.out.println("Teste Poll Display " + EnqueteNoticiaLocalServiceUtil.getUrlBase());
+
 String redirect = StringPool.BLANK;
 
 PollsQuestion question = (PollsQuestion)request.getAttribute(WebKeys.POLLS_QUESTION);

@@ -31,12 +31,18 @@ import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
+import com.liferay.util.portlet.PortletProps;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
+import javax.portlet.PortletPreferences;
+import javax.portlet.PortletSession;
 /**
  * The implementation of the enquete noticia local service.
  *
@@ -148,7 +154,7 @@ public class EnqueteNoticiaLocalServiceImpl
 	
 	public String getUrlBase(){
 		
-		return null;
+		return PortletProps.get("paginaPreference");
 	}
 	
 

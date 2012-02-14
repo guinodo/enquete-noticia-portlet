@@ -279,6 +279,10 @@ public class EnqueteNoticiaLocalServiceWrapper
 		return _enqueteNoticiaLocalService.getPaginasPortal();
 	}
 
+	public java.lang.String getUrlBase() {
+		return _enqueteNoticiaLocalService.getUrlBase();
+	}
+
 	public EnqueteNoticiaLocalService getWrappedEnqueteNoticiaLocalService() {
 		return _enqueteNoticiaLocalService;
 	}

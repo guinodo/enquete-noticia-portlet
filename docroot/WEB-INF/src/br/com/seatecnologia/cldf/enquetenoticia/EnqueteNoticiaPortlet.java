@@ -9,6 +9,7 @@ import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.util.bridges.mvc.MVCPortlet;
+import com.liferay.util.portlet.PortletProps;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -76,6 +77,7 @@ public class EnqueteNoticiaPortlet extends MVCPortlet {
 	
 	public void salvarPreferencias(ActionRequest actionRequest, ActionResponse actionResponse) throws IOException, PortletException{
 		
+		
 		String viewPreference = actionRequest.getParameter("viewPreference");
 		String paginaPreference = actionRequest.getParameter("paginaPreference");
 		String portletPreference = actionRequest.getParameter("portletPreference");
@@ -92,6 +94,11 @@ public class EnqueteNoticiaPortlet extends MVCPortlet {
 		if(portletPreference != null)
 			preferences.setValue("portletPreference", portletPreference);			
 		preferences.store();
-	}
 
+		PortletProps.set("paginaPreference", paginaPreference);
+		PortletProps.set("portletPreference", portletPreference);		
+	
+	} 
+
+	
 }

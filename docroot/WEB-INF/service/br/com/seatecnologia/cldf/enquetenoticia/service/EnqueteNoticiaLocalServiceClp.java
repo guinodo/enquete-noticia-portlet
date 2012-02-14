@@ -96,6 +96,9 @@ public class EnqueteNoticiaLocalServiceClp implements EnqueteNoticiaLocalService
 
 		_getPaginasPortalMethodKey19 = new MethodKey(_classLoaderProxy.getClassName(),
 				"getPaginasPortal");
+
+		_getUrlBaseMethodKey20 = new MethodKey(_classLoaderProxy.getClassName(),
+				"getUrlBase");
 	}
 
 	public br.com.seatecnologia.cldf.enquetenoticia.model.EnqueteNoticia addEnqueteNoticia(
@@ -654,6 +657,27 @@ public class EnqueteNoticiaLocalServiceClp implements EnqueteNoticiaLocalService
 		return (java.util.Map<java.util.Properties, java.util.List<com.liferay.portal.model.Portlet>>)ClpSerializer.translateOutput(returnObj);
 	}
 
+	public java.lang.String getUrlBase() {
+		Object returnObj = null;
+
+		MethodHandler methodHandler = new MethodHandler(_getUrlBaseMethodKey20);
+
+		try {
+			returnObj = _classLoaderProxy.invoke(methodHandler);
+		}
+		catch (Throwable t) {
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.lang.String)ClpSerializer.translateOutput(returnObj);
+	}
+
 	public ClassLoaderProxy getClassLoaderProxy() {
 		return _classLoaderProxy;
 	}
@@ -679,4 +703,5 @@ public class EnqueteNoticiaLocalServiceClp implements EnqueteNoticiaLocalService
 	private MethodKey _countByQuestionIdMethodKey17;
 	private MethodKey _getNoticiasNaoAssociadasMethodKey18;
 	private MethodKey _getPaginasPortalMethodKey19;
+	private MethodKey _getUrlBaseMethodKey20;
 }

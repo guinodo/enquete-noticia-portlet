@@ -285,6 +285,10 @@ public class EnqueteNoticiaLocalServiceUtil {
 		return getService().getPaginasPortal();
 	}
 
+	public static java.lang.String getUrlBase() {
+		return getService().getUrlBase();
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

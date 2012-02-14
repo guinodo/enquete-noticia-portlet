@@ -60,7 +60,6 @@
 		Properties paginaProp = new Properties(); 
 		paginaProp.load(new StringReader(requestPagina.substring(1, requestPagina.length() - 1).replace(", ", "\n")));
 		List<Portlet> portlets = paginasPortal.get(paginaProp);
-		System.out.println("Portlets:" + portlets);
 		for (Portlet portlet : portlets) {
 	%>
 		<aui:option label="<%=portlet.getDisplayName() %>" value="<%=portlet.getInstanceId() %>" />
