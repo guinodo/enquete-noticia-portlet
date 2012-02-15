@@ -14,12 +14,13 @@
  */
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="com.liferay.portlet.journal.model.JournalArticle"%>
 <%@page import="br.com.seatecnologia.cldf.enquetenoticia.service.EnqueteNoticiaLocalServiceUtil"%>
 <%@ include file="/html/portlet/polls_display/init.jsp" %>
-
+<%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 <%
 
-System.out.println("Teste Poll Display " + EnqueteNoticiaLocalServiceUtil.getUrlBase());
 
 String redirect = StringPool.BLANK;
 
@@ -56,6 +57,11 @@ if (!question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permi
 		}
 	}
 }
+
+String urlBase = EnqueteNoticiaLocalServiceUtil.getUrlBase();
+List<JournalArticle> articles = EnqueteNoticiaLocalServiceUtil.getNoticiasAssociadas(question.getQuestionId(), 0, EnqueteNoticiaLocalServiceUtil.countByQuestionId(question.getQuestionId()));
+
+
 %>
 
 <portlet:renderURL var="viewPollURL">
@@ -101,3 +107,8 @@ if (!question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permi
 		</c:otherwise>
 	</c:choose>
 </aui:form>
+
+<h5>Leia sobre:</h5>
+<% for (JournalArticle article : articles){ %>
+	<li><a href="<%= urlBase + article.getUrlTitle() %>"><%= article.getTitle() %></a><br></li>
+<% } %>

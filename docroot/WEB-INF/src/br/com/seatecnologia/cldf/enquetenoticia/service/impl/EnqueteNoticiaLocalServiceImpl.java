@@ -38,11 +38,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
-
-import javax.portlet.ActionRequest;
-import javax.portlet.ActionResponse;
-import javax.portlet.PortletPreferences;
-import javax.portlet.PortletSession;
 /**
  * The implementation of the enquete noticia local service.
  *
@@ -154,7 +149,8 @@ public class EnqueteNoticiaLocalServiceImpl
 	
 	public String getUrlBase(){
 		
-		return PortletProps.get("paginaPreference");
+		return PortletProps.get("paginaPreference") + "/-/asset_publisher/" + PortletProps.get("portletPreference") + "/content/";
+	
 	}
 	
 

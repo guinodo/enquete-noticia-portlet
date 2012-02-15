@@ -48,7 +48,7 @@
 		}
 	%>
 </aui:select>
-
+<h4>Escolha qual Asset Publisher as noticias serão submetidas:</h4>
 <%
 	String requestPagina = renderRequest.getParameter("paginaPreference");
 

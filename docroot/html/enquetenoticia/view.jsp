@@ -14,9 +14,6 @@
 
 
 <%
-	System.out.println("Properties: " + PortletProps.getProperties());	
-	System.out.println("Teste Pagina Preferece:  " + PortletProps.get("paginaPreference"));
-
 	long questionId = ParamUtil.getLong(request, "questionId");
 	String questionTitle = ParamUtil.getString(request, "questionTitle");
 
@@ -85,8 +82,10 @@
 		
 	if(viewPreference.equals("noticiaView")){
 		out.println("Lista de Noticias");
-	}else{
-		out.println("Lista de Enquetes");
-	}
+	}else{ %>
+
+	<%@ include file="/html/enquetenoticia/list_question.jsp" %>
+				
+<%	}
 }
 %>
