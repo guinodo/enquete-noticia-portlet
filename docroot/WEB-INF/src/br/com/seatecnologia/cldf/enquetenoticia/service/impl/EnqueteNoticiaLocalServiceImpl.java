@@ -36,6 +36,7 @@ import com.liferay.util.portlet.PortletProps;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 /**
@@ -121,7 +122,7 @@ public class EnqueteNoticiaLocalServiceImpl
 			if(!ignore.contains(layout.getFriendlyURL())){
 				if(!layout.hasChildren()){
 					Properties paginaProp = new Properties();
-					paginaProp.setProperty("pagina", prefixo + layout.getName("en_US"));
+					paginaProp.setProperty("pagina", prefixo + layout.getName(Locale.getDefault()));
 					paginaProp.setProperty("paginaURL", layout.getFriendlyURL());
 					layoutTypePortlet = (LayoutTypePortlet) layout.getLayoutType();
 					portlets = layoutTypePortlet.getPortlets();
@@ -131,7 +132,7 @@ public class EnqueteNoticiaLocalServiceImpl
 				}else{
 					List<Layout> children = layout.getAllChildren();
 					Properties paginaProp = new Properties();
-					paginaProp.setProperty("pagina", prefixo + layout.getName("en_US"));
+					paginaProp.setProperty("pagina", prefixo + layout.getName(Locale.getDefault()));
 					paginaProp.setProperty("paginaURL", layout.getFriendlyURL());
 					layoutTypePortlet = (LayoutTypePortlet) layout.getLayoutType();
 					portlets = layoutTypePortlet.getPortlets();

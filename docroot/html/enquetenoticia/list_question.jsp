@@ -1,3 +1,4 @@
+<%@page import="java.util.Locale"%>
 <%@page import="com.liferay.portlet.journal.model.JournalArticle"%>
 <%@page import="br.com.seatecnologia.cldf.enquetenoticia.service.EnqueteNoticiaLocalServiceUtil"%>
 <%@page import="java.text.DateFormat"%>
@@ -21,7 +22,7 @@
 		<table class="lista_enquete">
 			<tr>
 				<td>
-				<h1><%= aPollsQuestion.getTitle("en_US") %></h1>
+				<h1><%= aPollsQuestion.getTitle(Locale.getDefault()) %></h1>
 					<ol class="resultado" style="list-style-type:lower-alpha">
 					<% 
 					List<PollsChoice> pollChoices = aPollsQuestion.getChoices();				
