@@ -33,8 +33,8 @@ PollsQuestion question = (PollsQuestion)row.getObject();
 			<portlet:param name="questionTitle" value="<%= String.valueOf(question.getTitle(locale)) %>" />
 		</liferay-portlet:renderURL>
 		<liferay-ui:icon
-			image="help"
-			message="associate"
+			image="maximize"
+			message="Associar"
 			url="<%= associationURL %>"
 		/>
 	</c:if>

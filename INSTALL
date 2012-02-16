@@ -1,0 +1,4 @@
+Copie o arquivo docroot/WEB-INF/lib/enquete-noticia-portlet-service.jar para a pasta lib/ext do Liferay.
+
+No tomcat fica em tomcat/lib/ext/
+
