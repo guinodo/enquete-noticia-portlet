@@ -4,16 +4,11 @@
 <%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %>
 
 <liferay-ui:error key="nenhum-artigo-selecionado" message="nenhum-artigo-selecionado" />
-
 <aui:form name="fm1" method='POST' action="<%= submitURL %>">
 	<liferay-ui:error key="nenhum-artigo-selecionado" message="nenhum-artigo-selecionado"></liferay-ui:error>
 	<liferay-ui:error key="nenhum-artigo-selecionado" message="nenhum-artigo-selecionado" />
-	<h2>
-		<liferay-ui:message key="noticias-disponiveis" />
-	</h2>
-
-	<liferay-ui:search-container
-		emptyResultsMessage="todas-noticias-associadas">
+	<h2><liferay-ui:message key="noticias-disponiveis" /></h2>
+	<liferay-ui:search-container emptyResultsMessage="todas-noticias-associadas">
 		<liferay-ui:search-container-results
 			results="<%= EnqueteNoticiaLocalServiceUtil.getNoticiasNaoAssociadas(questionId, searchContainer.getStart(), searchContainer.getEnd()) %>"
 			total="<%= JournalArticleLocalServiceUtil.getJournalArticlesCount() - EnqueteNoticiaLocalServiceUtil.countByQuestionId(questionId) %>" />
@@ -28,10 +23,8 @@
 			</liferay-ui:search-container-column-text>
 			<aui:input name="questionId" type="hidden" value="<%= questionId %>" />
 			<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
-
 		</liferay-ui:search-container-row>
 		<liferay-ui:search-iterator />
 	</liferay-ui:search-container>
-
 	<aui:button type="submit"></aui:button>
 </aui:form>

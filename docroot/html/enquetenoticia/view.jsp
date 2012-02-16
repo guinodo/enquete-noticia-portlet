@@ -16,50 +16,35 @@
 <%
 	long questionId = ParamUtil.getLong(request, "questionId");
 	String questionTitle = ParamUtil.getString(request, "questionTitle");
-
 	String currentTitle = "Noticias associadas a enquete: " + questionTitle;
 	String avaliableTitle = "Noticias disponiveis para a enquete: " + questionTitle;
-
 	String redirectURL = renderRequest.getParameter("redirect");
 	String currentURL = PortalUtil.getCurrentURL(renderRequest);
-
 	if (redirectURL == null) {
 		redirectURL = PortalUtil.getCurrentURL(renderRequest);
 	}
-
 	if (PortalUtil.getCurrentURL(renderRequest).contains("/manage") && questionId != 0) {
 %>
-
-
 <liferay-ui:tabs names="current,available" refresh="false">
-
 	<!-- Artigos Associados -->
-
-
 	<liferay-ui:section>
 		<div id='poll_search_container'>
 			<liferay-ui:header backURL="<%= redirectURL %>" title="<%= currentTitle %>" />
 			<%@ include file="/html/enquetenoticia/list_current.jsp"%>
 		</div>
-
 	</liferay-ui:section>
-
 	<liferay-ui:section>
-
-		<!-- Artigos Disponiveis -->
+	<!-- Artigos Disponiveis -->
 		<div id="journalArticle_search_container">
 			<liferay-ui:header backURL="<%= redirectURL %>" title="<%= avaliableTitle %>" />
 			<%@ include file="/html/enquetenoticia/list_avaliable.jsp"%>
 		</div>
 	</liferay-ui:section>
 </liferay-ui:tabs>
-
 <%
 	} else {
 %>
-
 <%@ include file="/html/enquetenoticia/list_question.jsp"%>
-
 <%
 	}
 %>

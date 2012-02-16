@@ -62,8 +62,7 @@ public class EnqueteNoticiaLocalServiceImpl
 	
 
 
-	public List<JournalArticle> getNoticiasAssociadas(long questionId,
-			int start, int end) throws SystemException, PortalException {
+	public List<JournalArticle> getNoticiasAssociadas(long questionId, int start, int end) throws SystemException, PortalException {
 		List<EnqueteNoticia> enquetesAssociadas = EnqueteNoticiaUtil.findByQuestionID(questionId, start, end);
 		List<JournalArticle> listaArtigos = new ArrayList<JournalArticle>();
 		for (EnqueteNoticia enqueteNoticia : enquetesAssociadas) {
@@ -80,8 +79,7 @@ public class EnqueteNoticiaLocalServiceImpl
 		return EnqueteNoticiaUtil.countByQuestionID(questionId);
 	}
 
-	public List<JournalArticle> getNoticiasNaoAssociadas(long questionId,
-			int start, int end) throws SystemException, PortalException {
+	public List<JournalArticle> getNoticiasNaoAssociadas(long questionId, int start, int end) throws SystemException, PortalException {
 		List<EnqueteNoticia> enquetesAssociadas = EnqueteNoticiaUtil.findByQuestionID(questionId, start, end);
 		List<Object> listaArtigosAssociados = new ArrayList<Object>();
 
@@ -90,11 +88,9 @@ public class EnqueteNoticiaLocalServiceImpl
 			listaArtigosAssociados.add(articleId);
 		}
 
-		DynamicQuery query = DynamicQueryFactoryUtil.forClass(
-				JournalArticle.class, PortalClassLoaderUtil.getClassLoader());
+		DynamicQuery query = DynamicQueryFactoryUtil.forClass(JournalArticle.class, PortalClassLoaderUtil.getClassLoader());
 		if (!listaArtigosAssociados.isEmpty()) {
-			query.add(RestrictionsFactoryUtil.not(PropertyFactoryUtil.forName(
-					"id").in(listaArtigosAssociados)));
+			query.add(RestrictionsFactoryUtil.not(PropertyFactoryUtil.forName("id").in(listaArtigosAssociados)));
 		}
 		@SuppressWarnings("unchecked")
 		List<JournalArticle> results = JournalArticleLocalServiceUtil.dynamicQuery(query, start, end);

@@ -23,7 +23,6 @@
 
 <%
 	Map<Properties, List<Portlet>> paginasPortal = EnqueteNoticiaLocalServiceUtil.getPaginasPortal();
-
 %>
 
 <portlet:renderURL var="url" />
@@ -56,12 +55,10 @@
 		}
 	%>
 </aui:select>
-
 <%
 	}
 %>
 <aui:button type="submit"></aui:button>
-
 </form>
 
 <aui:script>

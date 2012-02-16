@@ -10,10 +10,8 @@
  <liferay-ui:search-container>
 	<liferay-ui:search-container-results
 		results="<%= PollsQuestionLocalServiceUtil.getPollsQuestions(searchContainer.getStart(), searchContainer.getEnd()) %>"
-		total="<%= PollsQuestionLocalServiceUtil.getPollsQuestionsCount() %>"
-		
+		total="<%= PollsQuestionLocalServiceUtil.getPollsQuestionsCount() %>"		
 	/>
-
 	<liferay-ui:search-container-row
 		className="com.liferay.portlet.polls.model.PollsQuestion"
 		modelVar="aPollsQuestion"
@@ -50,9 +48,7 @@
 			</tr>
 		</table>
 	<!-- Fim  Exibindo Enquetes formatadas-->
-	</liferay-ui:search-container-column-text>
-		
+	</liferay-ui:search-container-column-text>	
 	</liferay-ui:search-container-row>
-
 	<liferay-ui:search-iterator />
 </liferay-ui:search-container>
