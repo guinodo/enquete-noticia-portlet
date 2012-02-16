@@ -18,7 +18,6 @@ import java.util.Properties;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletException;
-import javax.portlet.PortletPreferences;
 
 /**
  * Portlet implementation class EnqueteNoticia
@@ -78,7 +77,7 @@ public class EnqueteNoticiaPortlet extends MVCPortlet {
 	public void salvarPreferencias(ActionRequest actionRequest, ActionResponse actionResponse) throws IOException, PortletException{
 		
 		
-		String viewPreference = actionRequest.getParameter("viewPreference");
+		//String viewPreference = actionRequest.getParameter("viewPreference");
 		String paginaPreference = actionRequest.getParameter("paginaPreference");
 		String portletPreference = actionRequest.getParameter("portletPreference");
 		
@@ -86,17 +85,13 @@ public class EnqueteNoticiaPortlet extends MVCPortlet {
 		paginaProp.load(new StringReader(paginaPreference.substring(1, paginaPreference.length() - 1).replace(", ", "\n")));
 		paginaPreference = paginaProp.getProperty("paginaURL");
 		
-		PortletPreferences preferences = actionRequest.getPreferences();
-		if(viewPreference != null)
-			preferences.setValue("viewPreference", viewPreference);
+//		if(viewPreference != null)
+//			preferences.setValue("viewPreference", viewPreference);
 		if(paginaPreference != null)
-			preferences.setValue("paginaPreference", paginaPreference);
+			PortletProps.set("paginaPreference", paginaPreference);
 		if(portletPreference != null)
-			preferences.setValue("portletPreference", portletPreference);			
-		preferences.store();
+			PortletProps.set("portletPreference", portletPreference);		
 
-		PortletProps.set("paginaPreference", paginaPreference);
-		PortletProps.set("portletPreference", portletPreference);		
 	
 	} 
 

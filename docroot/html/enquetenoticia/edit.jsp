@@ -24,17 +24,6 @@
 <%
 	Map<Properties, List<Portlet>> paginasPortal = EnqueteNoticiaLocalServiceUtil.getPaginasPortal();
 
-	if (!PortalUtil.getCurrentURL(renderRequest).contains("/manage")) {
-%>
-
-	<aui:input type="radio" name="viewPreference" value="enqueteView"
-		label="exibir-enquetes-e-suas-associacoes"></aui:input>
-	<aui:input type="radio" name="viewPreference" value="noticiaView"
-		label="exibir-noticias-e-suas-associacoes"></aui:input>
-
-	
-<%
-	}
 %>
 
 <portlet:renderURL var="url" />

@@ -58,9 +58,7 @@ if (!question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permi
 	}
 }
 
-String urlBase = EnqueteNoticiaLocalServiceUtil.getUrlBase();
 List<JournalArticle> articles = EnqueteNoticiaLocalServiceUtil.getNoticiasAssociadas(question.getQuestionId(), 0, EnqueteNoticiaLocalServiceUtil.countByQuestionId(question.getQuestionId()));
-
 
 %>
 
@@ -109,6 +107,8 @@ List<JournalArticle> articles = EnqueteNoticiaLocalServiceUtil.getNoticiasAssoci
 </aui:form>
 
 <h5>Leia sobre:</h5>
+<ul>
 <% for (JournalArticle article : articles){ %>
-	<li><a href="<%= urlBase + article.getUrlTitle() %>"><%= article.getTitle() %></a><br></li>
+	<li><a href="<%= EnqueteNoticiaLocalServiceUtil.getUrlBase() + article.getUrlTitle() %>"><%= article.getTitle() %></a><br></li>
 <% } %>
+</ul>
