@@ -31,8 +31,10 @@ import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
-import com.liferay.util.portlet.PortletProps;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -144,9 +146,18 @@ public class EnqueteNoticiaLocalServiceImpl
 		}
 	}
 	
-	public String getUrlBase(){
-		
-		return PortletProps.get("paginaPreference") + "/-/asset_publisher/" + PortletProps.get("portletPreference") + "/content/";
+	public String getUrlBase() {
+		Properties props = new Properties();
+		try {
+			props.load(new FileInputStream("enquete-noticia.properties"));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return props.getProperty("paginaPreference", "/web/guest") + "/-/asset_publisher/" + props.getProperty("portletPreference", "aaaa") + "/content/";
 	
 	}
 	

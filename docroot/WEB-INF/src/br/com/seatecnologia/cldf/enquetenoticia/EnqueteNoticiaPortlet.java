@@ -9,8 +9,8 @@ import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.util.bridges.mvc.MVCPortlet;
-import com.liferay.util.portlet.PortletProps;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.Properties;
@@ -59,9 +59,11 @@ public class EnqueteNoticiaPortlet extends MVCPortlet {
 		Properties paginaProp = new Properties(); 
 		paginaProp.load(new StringReader(paginaPreference.substring(1, paginaPreference.length() - 1).replace(", ", "\n")));
 		paginaPreference = paginaProp.getProperty("paginaURL");
+		Properties rewrite = new Properties(paginaProp);
 		if(paginaPreference != null)
-			PortletProps.set("paginaPreference", paginaPreference);
+			rewrite.setProperty("paginaPreference", paginaPreference);
 		if(portletPreference != null)
-			PortletProps.set("portletPreference", portletPreference);
+			rewrite.setProperty("portletPreference", portletPreference);
+		rewrite.store(new FileOutputStream("enquete-noticia.properties"), null);
 	} 	
 }
