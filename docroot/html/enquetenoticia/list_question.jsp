@@ -26,8 +26,12 @@
 					<ol class="resultado" style="list-style-type:lower-alpha">
 					<% 
 					List<PollsChoice> pollChoices = aPollsQuestion.getChoices();				
-					for (PollsChoice pollChoice : pollChoices){ %>					
-						<li><p><%= pollChoice.getDescription() %>&nbsp;<span id="<%= pollChoice.getName() %>" style="width:<%= 3 + pollChoice.getVotesCount()/aPollsQuestion.getVotesCount()*70 %>%; background-color:#FF0000;display:inline-block;">&nbsp;<%= pollChoice.getVotesCount() %>&nbsp;</span><span>&nbsp;<%= pollChoice.getVotesCount()/aPollsQuestion.getVotesCount()*100 %> %</span></p></li>						
+					for (PollsChoice pollChoice : pollChoices){ 
+						int totalVotos = aPollsQuestion.getVotesCount();
+						if(totalVotos == 0)
+							totalVotos = 1;
+					%>					
+						<li><p><%= pollChoice.getDescription() %>&nbsp;<span id="<%= pollChoice.getName() %>" style="width:<%= 3 + pollChoice.getVotesCount()/totalVotos*70 %>%; background-color:#FF0000;display:inline-block;">&nbsp;<%= pollChoice.getVotesCount() %>&nbsp;</span><span>&nbsp;<%= pollChoice.getVotesCount()/totalVotos*100 %> %</span></p></li>						
 					<%
 					}
 					%>

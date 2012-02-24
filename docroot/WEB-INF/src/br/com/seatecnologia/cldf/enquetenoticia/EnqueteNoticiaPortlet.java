@@ -8,12 +8,14 @@ import br.com.seatecnologia.cldf.enquetenoticia.service.persistence.EnqueteNotic
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.model.PortletPreferences;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.Properties;
+import java.util.prefs.Preferences;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -65,5 +67,6 @@ public class EnqueteNoticiaPortlet extends MVCPortlet {
 		if(portletPreference != null)
 			rewrite.setProperty("portletPreference", portletPreference);
 		rewrite.store(new FileOutputStream("enquete-noticia.properties"), null);
+				
 	} 	
 }
