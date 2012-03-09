@@ -37,7 +37,7 @@
 					%>
 				</ol>
 				<div>
-					<span><strong>Criado em:&nbsp;</strong><%= DateFormat.getDateTimeInstance().format(aPollsQuestion.getCreateDate()) %></span>&nbsp;<span><strong>Último voto:&nbsp;</strong><%= DateFormat.getDateTimeInstance().format(aPollsQuestion.getLastVoteDate()) %></span>
+					<span><strong>Criado em:&nbsp;</strong><%= DateFormat.getDateTimeInstance().format(aPollsQuestion.getCreateDate()) %></span>&nbsp;<span><% if(aPollsQuestion.getVotesCount() != 0) {  %> <strong>Último voto:&nbsp;</strong><%= DateFormat.getDateTimeInstance().format(aPollsQuestion.getLastVoteDate()) %></span> <% } %>
 					<h5>Descrição:</h5><span style="margin-left:1em"><%= aPollsQuestion.getDescription() %></span>
 				</div>
 				<div>

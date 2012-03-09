@@ -1,4 +1,3 @@
-<%@page import="com.liferay.util.portlet.PortletProps"%>
 <%@page import="javax.portlet.PortletPreferences"%>
 <%@page import="com.liferay.portal.service.LayoutLocalServiceUtil"%>
 <%@ page import="com.liferay.portal.util.PortalUtil"%>
