@@ -8,6 +8,7 @@ import br.com.seatecnologia.cldf.enquetenoticia.service.persistence.EnqueteNotic
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 import java.io.FileOutputStream;
@@ -18,26 +19,60 @@ import java.util.Properties;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletException;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
 
 /**
  * Portlet implementation class EnqueteNoticia
  */
 public class EnqueteNoticiaPortlet extends MVCPortlet {
 
+	@Override
+	public void doView(RenderRequest renderRequest,
+			RenderResponse renderResponse) throws IOException, PortletException {
+		
+		String available = ParamUtil.getString(renderRequest, "available");
+		System.out.println("available: "+available);
+		String delta = ParamUtil.getString(renderRequest, "deltaavailable");
+		
+		if ((available != "") || (delta != "") ) {
+			renderRequest.setAttribute("tabs1", "available");
+		}
+		
+		
+		super.doView(renderRequest, renderResponse);
+	}
 	public void associateQuestionArticle(ActionRequest request, ActionResponse response) throws SystemException, IOException {
+		System.out.println("passou no associateQuestionArticle");
 		String questionId = request.getParameter("questionId");
 		String[] articleIds = request.getParameterValues("articleId");
-		if (articleIds.length == 0 || articleIds == null) {
+//		if (articleIds.length == 0 || articleIds == null) {
+//			SessionErrors.add(request, "nenhum-artigo-selecionado");
+//			sendRedirect(request, response);
+//		}
+//		for (String articleId : articleIds) {
+//			EnqueteNoticia enqueteNoticia = new EnqueteNoticiaImpl();
+//			enqueteNoticia.setArticleId(Long.parseLong(articleId));
+//			enqueteNoticia.setQuestionId(Long.parseLong(questionId));
+//			enqueteNoticia.setEnqueteNoticiaId(CounterLocalServiceUtil.increment(EnqueteNoticia.class.getName()));
+//			EnqueteNoticiaLocalServiceUtil.addEnqueteNoticia(enqueteNoticia);
+//		}
+		
+		
+		try {
+			for (String articleId : articleIds) {
+				EnqueteNoticia enqueteNoticia = new EnqueteNoticiaImpl();
+				enqueteNoticia.setArticleId(Long.parseLong(articleId));
+				enqueteNoticia.setQuestionId(Long.parseLong(questionId));
+				enqueteNoticia.setEnqueteNoticiaId(CounterLocalServiceUtil.increment(EnqueteNoticia.class.getName()));
+				EnqueteNoticiaLocalServiceUtil.addEnqueteNoticia(enqueteNoticia);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
 			SessionErrors.add(request, "nenhum-artigo-selecionado");
-			sendRedirect(request, response);
 		}
-		for (String articleId : articleIds) {
-			EnqueteNoticia enqueteNoticia = new EnqueteNoticiaImpl();
-			enqueteNoticia.setArticleId(Long.parseLong(articleId));
-			enqueteNoticia.setQuestionId(Long.parseLong(questionId));
-			enqueteNoticia.setEnqueteNoticiaId(CounterLocalServiceUtil.increment(EnqueteNoticia.class.getName()));
-			EnqueteNoticiaLocalServiceUtil.addEnqueteNoticia(enqueteNoticia);
-		}
+		
+		
 		sendRedirect(request, response);
 	}
 	public void removeAssociateQuestionArticle(ActionRequest request, ActionResponse response) throws SystemException, IOException, NoSuchEnqueteNoticiaException, NumberFormatException {

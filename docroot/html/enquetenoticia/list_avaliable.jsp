@@ -3,12 +3,20 @@
 <%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 <%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %>
 
+<% 
+
+
+%>
+
 <liferay-ui:error key="nenhum-artigo-selecionado" message="nenhum-artigo-selecionado" />
 <aui:form name="fm1" method='POST' action="<%= submitURL %>">
 	<liferay-ui:error key="nenhum-artigo-selecionado" message="nenhum-artigo-selecionado"></liferay-ui:error>
 	<liferay-ui:error key="nenhum-artigo-selecionado" message="nenhum-artigo-selecionado" />
 	<h2><liferay-ui:message key="noticias-disponiveis" /></h2>
-	<liferay-ui:search-container emptyResultsMessage="todas-noticias-associadas">
+	<liferay-ui:search-container emptyResultsMessage="todas-noticias-associadas" curParam="available" >
+		
+		
+		
 		<liferay-ui:search-container-results
 			results="<%= EnqueteNoticiaLocalServiceUtil.getNoticiasNaoAssociadas(questionId, searchContainer.getStart(), searchContainer.getEnd()) %>"
 			total="<%= JournalArticleLocalServiceUtil.getJournalArticlesCount() - EnqueteNoticiaLocalServiceUtil.countByQuestionId(questionId) %>" />

@@ -74,5 +74,4 @@ function <portlet:namespace />passoFinal() {
 	var url = "<%=url%>" + "&<portlet:namespace />portletPreferences="+value;
 	window.location.href = url;
 }
-
 </aui:script>
