@@ -106,7 +106,7 @@ List<JournalArticle> articles = EnqueteNoticiaLocalServiceUtil.getNoticiasAssoci
 	</c:choose>
 </aui:form>
 
-<h5>Leia sobre:</h5>
+<h5><liferay-ui:message key="nenhuma-noticia-associada"/>:</h5>
 <ul>
 <% for (JournalArticle article : articles){ %>
 	<li><a href="<%= EnqueteNoticiaLocalServiceUtil.getUrlBase() + article.getUrlTitle() %>"><%= article.getTitle() %></a><br></li>
