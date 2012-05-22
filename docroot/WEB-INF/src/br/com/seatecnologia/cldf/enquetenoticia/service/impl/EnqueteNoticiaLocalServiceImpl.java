@@ -24,6 +24,8 @@ import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
@@ -63,7 +65,7 @@ public class EnqueteNoticiaLocalServiceImpl
 	 * Never reference this interface directly. Always use {@link br.com.seatecnologia.cldf.enquetenoticia.service.EnqueteNoticiaLocalServiceUtil} to access the enquete noticia local service.
 	 */
 	
-
+	private static Log log = LogFactoryUtil.getLog(EnqueteNoticiaLocalServiceImpl.class);
 
 	public List<JournalArticle> getNoticiasAssociadas(long questionId, int start, int end) throws SystemException, PortalException {
 		List<EnqueteNoticia> enquetesAssociadas = EnqueteNoticiaUtil.findByQuestionID(questionId, start, end);
@@ -145,20 +147,20 @@ public class EnqueteNoticiaLocalServiceImpl
 			}
 		}
 	}
-	
+
+	/**
+	 * Retorna a url base para ser usada na associacao de noticia com enquetes
+	 */
 	public String getUrlBase() {
 		Properties props = new Properties();
 		try {
 			props.load(new FileInputStream("enquete-noticia.properties"));
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error("Arquivo nao encontrado: " + e.getMessage());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error("Nao foi possivel fazer a leitura do arquivo de propriedades: " + e.getMessage());
 		}
-		return props.getProperty("paginaPreference", "/web/guest") + "/-/asset_publisher/" + props.getProperty("portletPreference", "aaaa") + "/content/";
-	
+		return props.getProperty("paginaPreference", "/web/guest") + "/-/asset_publisher/" + props.getProperty("portletPreference", "aaaa") + "/content/";	
 	}
 	
 

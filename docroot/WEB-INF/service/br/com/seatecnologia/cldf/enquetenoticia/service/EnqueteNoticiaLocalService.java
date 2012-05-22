@@ -231,11 +231,6 @@ public interface EnqueteNoticiaLocalService extends PersistedModelLocalService {
 	*/
 	public void setBeanIdentifier(java.lang.String beanIdentifier);
 
-	/**
-	* NOTE FOR DEVELOPERS:
-	*
-	* Never reference this interface directly. Always use {@link br.com.seatecnologia.cldf.enquetenoticia.service.EnqueteNoticiaLocalServiceUtil} to access the enquete noticia local service.
-	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> getNoticiasAssociadas(
 		long questionId, int start, int end)
@@ -255,6 +250,9 @@ public interface EnqueteNoticiaLocalService extends PersistedModelLocalService {
 	public java.util.Map<java.util.Properties, java.util.List<com.liferay.portal.model.Portlet>> getPaginasPortal()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Retorna a url base para ser usada na associacao de noticia com enquetes
+	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.lang.String getUrlBase();
 }

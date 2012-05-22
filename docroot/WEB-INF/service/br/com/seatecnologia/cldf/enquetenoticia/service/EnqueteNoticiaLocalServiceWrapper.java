@@ -248,11 +248,6 @@ public class EnqueteNoticiaLocalServiceWrapper
 		_enqueteNoticiaLocalService.setBeanIdentifier(beanIdentifier);
 	}
 
-	/**
-	* NOTE FOR DEVELOPERS:
-	*
-	* Never reference this interface directly. Always use {@link br.com.seatecnologia.cldf.enquetenoticia.service.EnqueteNoticiaLocalServiceUtil} to access the enquete noticia local service.
-	*/
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> getNoticiasAssociadas(
 		long questionId, int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -279,6 +274,9 @@ public class EnqueteNoticiaLocalServiceWrapper
 		return _enqueteNoticiaLocalService.getPaginasPortal();
 	}
 
+	/**
+	* Retorna a url base para ser usada na associacao de noticia com enquetes
+	*/
 	public java.lang.String getUrlBase() {
 		return _enqueteNoticiaLocalService.getUrlBase();
 	}
