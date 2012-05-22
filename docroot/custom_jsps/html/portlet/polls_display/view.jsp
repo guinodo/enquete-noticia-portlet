@@ -14,14 +14,13 @@
  */
 --%>
 
+<%@page import="br.com.seatecnologia.cldf.enquetenoticia.service.EnqueteNoticiaLocalServiceUtil"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="com.liferay.portlet.journal.model.JournalArticle"%>
-<%@page import="br.com.seatecnologia.cldf.enquetenoticia.service.EnqueteNoticiaLocalServiceUtil"%>
 <%@ include file="/html/portlet/polls_display/init.jsp" %>
 <%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 <%
-
-
 String redirect = StringPool.BLANK;
 
 PollsQuestion question = (PollsQuestion)request.getAttribute(WebKeys.POLLS_QUESTION);
@@ -58,8 +57,21 @@ if (!question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permi
 	}
 }
 
-List<JournalArticle> articles = EnqueteNoticiaLocalServiceUtil.getNoticiasAssociadas(question.getQuestionId(), 0, EnqueteNoticiaLocalServiceUtil.countByQuestionId(question.getQuestionId()));
+/* System.out.println("=====> [TESTE] VRAU: ");
+try{
+	System.out.println("=====> [TESTE] QuestionID: " + question.getQuestionId());
+	System.out.println("=====> FLEEBAS "+ EnqueteNoticiaLocalServiceUtil.countByQuestionId(question.getQuestionId()));	
+}catch(Exception e){
+	System.out.println("DEU PAU!!!");		
+} */
 
+List<JournalArticle> articles = new ArrayList<JournalArticle>();
+try{
+	articles = EnqueteNoticiaLocalServiceUtil.getNoticiasAssociadas(question.getQuestionId(), 0, EnqueteNoticiaLocalServiceUtil.countByQuestionId(question.getQuestionId()));
+}catch(Exception e){
+	//TODO: Remover
+	System.out.println("===> [ERRO] -- Nao recuperou a noticia associada");
+}
 %>
 
 <portlet:renderURL var="viewPollURL">
@@ -106,7 +118,14 @@ List<JournalArticle> articles = EnqueteNoticiaLocalServiceUtil.getNoticiasAssoci
 	</c:choose>
 </aui:form>
 
-<h5><liferay-ui:message key="nenhuma-noticia-associada"/>:</h5>
+<c:choose>
+	<c:when test="<%= articles!= null && articles.size() > 0 %>">
+		<h5><liferay-ui:message key="read-about"/>:</h5>
+	</c:when>
+	<c:otherwise>
+		<liferay-ui:message key="nenhuma-noticia-associada"/>
+	</c:otherwise>
+</c:choose>
 <ul>
 <% for (JournalArticle article : articles){ %>
 	<li><a href="<%= EnqueteNoticiaLocalServiceUtil.getUrlBase() + article.getUrlTitle() %>"><%= article.getTitle() %></a><br></li>
