@@ -45,7 +45,7 @@
 <aui:select id="portletPreference" name="portletPreference" onChange='<%= renderResponse.getNamespace() + "passoFinal()"%>'>
 
 	<%
-		Properties paginaProp = new Properties(); 
+		Properties paginaProp = new Properties();
 		paginaProp.load(new StringReader(requestPagina.substring(1, requestPagina.length() - 1).replace(", ", "\n")));
 		List<Portlet> portlets = paginasPortal.get(paginaProp);
 		for (Portlet portlet : portlets) {

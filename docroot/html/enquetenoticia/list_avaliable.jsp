@@ -13,7 +13,7 @@
 	<liferay-ui:error key="nenhum-artigo-selecionado" message="nenhum-artigo-selecionado"></liferay-ui:error>
 	<liferay-ui:error key="nenhum-artigo-selecionado" message="nenhum-artigo-selecionado" />
 	<h2><liferay-ui:message key="noticias-disponiveis" /></h2>
-	<liferay-ui:search-container emptyResultsMessage="todas-noticias-associadas" curParam="available" >
+	<liferay-ui:search-container emptyResultsMessage="todas-noticias-associadas" curParam="available" iteratorURL="<%= portletURL %>">
 		
 		
 		

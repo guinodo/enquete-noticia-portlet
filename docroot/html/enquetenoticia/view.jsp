@@ -32,7 +32,8 @@
 		String currentTab = (String) request.getAttribute("tabs1");
 		PortletURL portletURL = renderResponse.createRenderURL();
 		portletURL.setParameter("struts_action", "/enquetenoticia/view");
-
+		portletURL.setParameter("questionTitle", questionTitle);
+		portletURL.setParameter("questionId", questionId+"");
 %>
 <liferay-ui:tabs 
 	names="current,available" 
